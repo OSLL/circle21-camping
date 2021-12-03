@@ -99,7 +99,7 @@
         app:srcCompat="@drawable/ic_home" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/back_view_icon_id"
         android:layout_width="44dp"
         android:layout_height="46dp"
         android:layout_marginStart="20dp"
@@ -111,7 +111,7 @@
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/setting_icon_id"
         android:layout_width="49dp"
         android:layout_height="55dp"
         android:layout_marginTop="28dp"
