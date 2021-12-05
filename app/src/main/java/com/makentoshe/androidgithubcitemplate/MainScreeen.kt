@@ -4,26 +4,26 @@ package com.makentoshe.androidgithubcitemplate
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-//import android.util.Log
 import android.view.View
 import android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.view.animation.TranslateAnimation
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.scaleMatrix
+import kotlinx.android.synthetic.main.activity_main_screen.*
 
 
 class MainScreeen : AppCompatActivity() {
     private lateinit var button : Button
     private lateinit var imageButton: ImageButton
     @RequiresApi(Build.VERSION_CODES.HONEYCOMB)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
-//        button = findViewById(R.id.button)
-//            imageButton = findViewById(R.id.imageButton3)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -34,13 +34,13 @@ class MainScreeen : AppCompatActivity() {
                         or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
             }
         }
+
         val textbutton: TextView = findViewById(R.id.new_roude_id)
-        textbutton.setOnClickListener {
             val text_toast = "Переход на экран заметки, скоро..."
             val duration = Toast.LENGTH_SHORT
             val toast = Toast.makeText(applicationContext, text_toast, duration)
             toast.show()
-        }
+
         // Тут при нажатии на текст "Новая заметка" , будет всплывать уведомление
         val textbutton2: TextView = findViewById(R.id.plan_id)
         textbutton2.setOnClickListener {
@@ -95,6 +95,7 @@ class MainScreeen : AppCompatActivity() {
             val toast = Toast.makeText(applicationContext, Setting, duration)
             toast.show()
         }
+    }
     }
     //fun ButtonClick(view: View) {
 //        val intent = Intent(this, MainActivity::class.java)

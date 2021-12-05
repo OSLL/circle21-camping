@@ -12,7 +12,7 @@
         android:id="@+id/new_roude_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="134dp"
         android:fontFamily="@font/aqum_classic"
         android:gravity="center"
         android:text="@string/new_bottom"
@@ -95,7 +95,7 @@
         android:id="@+id/imageView"
         android:layout_width="94dp"
         android:layout_height="102dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -107,7 +107,7 @@
         android:layout_width="41dp"
         android:layout_height="42dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:background="#00000000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -119,7 +119,7 @@
         android:id="@+id/setting_icon_id"
         android:layout_width="49dp"
         android:layout_height="55dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="38dp"
         android:layout_marginEnd="20dp"
         android:background="#00000000"
         app:layout_constraintEnd_toEndOf="parent"
@@ -129,7 +129,7 @@
         android:layout_marginRight="20dp" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/line_5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -139,7 +139,7 @@
         app:srcCompat="@drawable/ic_line_2" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/line_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -149,7 +149,7 @@
         app:srcCompat="@drawable/ic_line_4" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/line_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -159,7 +159,7 @@
         app:srcCompat="@drawable/ic_line_3" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/line_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -169,7 +169,7 @@
         app:srcCompat="@drawable/ic_line_5" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/line_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
