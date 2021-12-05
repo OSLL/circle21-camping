@@ -40,10 +40,6 @@ class MainScreeen : AppCompatActivity() {
         // Тут при нажатии на текст "Новая заметка" , будет всплывать уведомление
         val textbutton2: TextView = findViewById(R.id.plan_id)
         textbutton2.setOnClickListener {
-            val text_toast2 = "Переход на экран маршрута, скоро..."
-            val duration = Toast.LENGTH_SHORT
-            val toast = Toast.makeText(applicationContext, text_toast2, duration)
-            toast.show()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

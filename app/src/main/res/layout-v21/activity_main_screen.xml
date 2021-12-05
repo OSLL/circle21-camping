@@ -32,7 +32,6 @@
         android:layout_marginTop="60dp"
         android:fontFamily="@font/aqum_classic"
         android:gravity="center"
-        android:onClick="ButtonClick"
         android:text="@string/roude"
         android:textColor="@color/white"
         android:textSize="30sp"

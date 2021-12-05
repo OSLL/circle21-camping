@@ -24,6 +24,7 @@
         android:textColor="@color/black"
         android:layout_marginLeft="5dp" />
 
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"

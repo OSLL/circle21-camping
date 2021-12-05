@@ -7,6 +7,7 @@
     tools:context=".MainScreeen"
     android:background="@drawable/gradient_background">
 
+
     <TextView
         android:id="@+id/new_roude_id"
         android:layout_width="wrap_content"
