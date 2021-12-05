@@ -21,7 +21,7 @@ class MainScreeen : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.HONEYCOMB)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main_screen)
 //        button = findViewById(R.id.button)
 //            imageButton = findViewById(R.id.imageButton3)
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -44,6 +44,8 @@ class MainScreeen : AppCompatActivity() {
             val duration = Toast.LENGTH_SHORT
             val toast = Toast.makeText(applicationContext, text_toast2, duration)
             toast.show()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         val textbutton3: TextView = findViewById(R.id.review_id)
@@ -94,11 +96,10 @@ class MainScreeen : AppCompatActivity() {
             toast.show()
         }
     }
-    fun ButtonClick(view: View) {
-        // val myToast = Toast.makeText(this, message, duration);
-        val GoMap = Intent(this, MainActivity::class.java)
-        startActivity(GoMap)
-    }
+    //fun ButtonClick(view: View) {
+//        val intent = Intent(this, MainActivity::class.java)
+//        startActivity(intent)
+    //}
 
 //
 //    fun New_the_note (view: View) {
