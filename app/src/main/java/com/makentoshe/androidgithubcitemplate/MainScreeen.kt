@@ -1,6 +1,7 @@
 package com.makentoshe.androidgithubcitemplate
 
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 //import android.util.Log
@@ -93,6 +94,12 @@ class MainScreeen : AppCompatActivity() {
             toast.show()
         }
     }
+    fun ButtonClick(view: View) {
+        // val myToast = Toast.makeText(this, message, duration);
+        val GoMap = Intent(this, MainActivity::class.java)
+        startActivity(GoMap)
+    }
+
 //
 //    fun New_the_note (view: View) {
 //        Log.d("My Tag", "NewTheNote complete")
