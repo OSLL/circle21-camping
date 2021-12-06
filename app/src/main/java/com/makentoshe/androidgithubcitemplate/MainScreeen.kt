@@ -97,35 +97,4 @@ class MainScreeen : AppCompatActivity() {
         }
     }
     }
-    //fun ButtonClick(view: View) {
-//        val intent = Intent(this, MainActivity::class.java)
-//        startActivity(intent)
-    //}
 
-//
-//    fun New_the_note (view: View) {
-//        Log.d("My Tag", "NewTheNote complete")
-//    }
-//    fun route (view: View) {
-//        Log.d("My Tag", "route complete")
-//    }
-//    fun preparation (view: View) {
-//        Log.d("My Tag", "preparation complete")
-//    }
-//    fun ButtonStop (view: View) {
-//        Log.d("My Tag", "ButtonStop complete")
-//    }
-//    fun EatButton (view: View) {
-//        Log.d("My Tag", "EatButton complete")
-//    }
-//    fun advice (view: View) {
-//        Log.d("My Tag", "advice complete")
-//    }
-//    fun new_route (view: View) {
-//        Log.d("My Tag", "new_route complete")
-//    }
-//    fun setting (view: View) {
-//        Log.d("My Tag", "setting complete")
-//    }
-
-}
