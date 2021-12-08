@@ -26,8 +26,8 @@
         <action
             android:id="@+id/action_global_mainActivity_DD"
             app:destination="@id/mainActivity_DD"
-            app:enterAnim="@anim/line_in_right"
-            app:exitAnim="@anim/line_in_left"
+            app:enterAnim="@anim/line_up"
+            app:exitAnim="@anim/line_in_down"
             app:popEnterAnim="@anim/slide_out_left"
             app:popExitAnim="@anim/slide_out_right" />
     </navigation>
