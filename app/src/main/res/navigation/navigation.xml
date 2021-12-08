@@ -23,5 +23,17 @@
             app:exitAnim="@anim/slide_in_left"
             app:popEnterAnim="@anim/slide_out_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_global_mainActivity_DD"
+            app:destination="@id/mainActivity_DD"
+            app:enterAnim="@anim/line_in_right"
+            app:exitAnim="@anim/line_in_left"
+            app:popEnterAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </navigation>
+    <activity
+        android:id="@+id/mainActivity_DD"
+        android:name="com.makentoshe.androidgithubcitemplate.MainActivity_DD"
+        android:label="activity_main_dd"
+        tools:layout="@layout/activity_main_dd" />
 </navigation>
