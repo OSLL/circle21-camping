@@ -2,19 +2,16 @@ package com.makentoshe.androidgithubcitemplate
 
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.view.animation.TranslateAnimation
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.scaleMatrix
-import kotlinx.android.synthetic.main.activity_main_screen.*
-
 
 class MainScreeen : AppCompatActivity() {
     private lateinit var button : Button
@@ -34,18 +31,24 @@ class MainScreeen : AppCompatActivity() {
                         or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
             }
         }
-
+        var mediaPlayer = MediaPlayer.create(this, R.raw.button_click_sound)
+        val Up_Animation : Animation
+        Up_Animation = AnimationUtils.loadAnimation(this, R.anim.line_up)
         val textbutton: TextView = findViewById(R.id.new_roude_id)
+        textbutton.setOnClickListener {
             val text_toast = "Переход на экран заметки, скоро..."
             val duration = Toast.LENGTH_SHORT
             val toast = Toast.makeText(applicationContext, text_toast, duration)
             toast.show()
+            mediaPlayer.start()
+        }
 
         // Тут при нажатии на текст "Новая заметка" , будет всплывать уведомление
         val textbutton2: TextView = findViewById(R.id.plan_id)
         textbutton2.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            mediaPlayer.start()
         }
 
         val textbutton3: TextView = findViewById(R.id.review_id)
@@ -54,6 +57,7 @@ class MainScreeen : AppCompatActivity() {
             val duration = Toast.LENGTH_SHORT
             val toast = Toast.makeText(applicationContext, text_toast3, duration)
             toast.show()
+            mediaPlayer.start()
         }
 
         val textbutton4: TextView = findViewById(R.id.hike_id)
@@ -64,6 +68,7 @@ class MainScreeen : AppCompatActivity() {
 //            toast.show()
             val intent = Intent(this, MainActivity_DD::class.java)
             startActivity(intent)
+            mediaPlayer.start()
         }
 
         val textbutton5: TextView = findViewById(R.id.eat_id)
@@ -72,6 +77,7 @@ class MainScreeen : AppCompatActivity() {
             val duration = Toast.LENGTH_SHORT
             val toast = Toast.makeText(applicationContext, text_toast5, duration)
             toast.show()
+            mediaPlayer.start()
         }
 
         val ButtonStart: Button = findViewById(R.id.button)
@@ -80,6 +86,7 @@ class MainScreeen : AppCompatActivity() {
             val duration = Toast.LENGTH_SHORT
             val toast = Toast.makeText(applicationContext, Start, duration)
             toast.show()
+            mediaPlayer.start()
         }
 
         val BackImageButton: ImageButton = findViewById(R.id.back_view_icon_id)
@@ -88,6 +95,7 @@ class MainScreeen : AppCompatActivity() {
             val duration = Toast.LENGTH_SHORT
             val toast = Toast.makeText(applicationContext, Back, duration)
             toast.show()
+            mediaPlayer.start()
         }
 
         val SettingImageButton: ImageButton = findViewById(R.id.setting_icon_id)
@@ -96,6 +104,7 @@ class MainScreeen : AppCompatActivity() {
             val duration = Toast.LENGTH_SHORT
             val toast = Toast.makeText(applicationContext, Setting, duration)
             toast.show()
+            mediaPlayer.start()
         }
     }
 
