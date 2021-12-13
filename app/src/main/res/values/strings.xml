@@ -8,4 +8,6 @@
     <string name="review" translatable="false">Советы и отзывы</string>
     <string name="start" translatable="false">Начать</string>
     <string name="todo">TODO</string>
+    <string name="home">HOME</string>
+    <string name="back">Back</string>
 </resources>
