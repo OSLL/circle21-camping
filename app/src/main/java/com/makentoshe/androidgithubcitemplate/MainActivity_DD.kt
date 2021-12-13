@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
-import com.makentoshe.androidgithubcitemplate.R
 
 class MainActivity_DD : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
