@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainScreeen"
-    android:background="@drawable/gradient_background">
+    android:background="@color/my_color">
 
     <TextView
         android:id="@+id/new_roude_id"
@@ -30,12 +30,14 @@
         android:layout_width="159dp"
         android:layout_height="30dp"
         android:layout_marginTop="60dp"
+        android:layout_marginBottom="15dp"
         android:fontFamily="@font/aqum_classic"
         android:gravity="center"
         android:text="@string/roude"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:translationZ="4sp"
+        app:layout_constraintBottom_toTopOf="@+id/line_5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/eat_id"
@@ -89,14 +91,15 @@
         app:layout_constraintTop_toBottomOf="@+id/new_roude_id" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/Home_Image_View"
         android:layout_width="94dp"
         android:layout_height="102dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="30dp"
+        android:contentDescription="@string/home"
+        app:layout_constraintBottom_toTopOf="@+id/new_roude_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_home" />
 
     <ImageButton
@@ -104,10 +107,14 @@
         android:layout_width="44dp"
         android:layout_height="46dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="23dp"
         android:background="#00000000"
+        android:contentDescription="@string/back"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/Home_Image_View"
         app:srcCompat="@drawable/ic_back"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -115,11 +122,15 @@
         android:id="@+id/setting_icon_id"
         android:layout_width="49dp"
         android:layout_height="55dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:background="#00000000"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/Home_Image_View"
+        app:layout_constraintTop_toTopOf="@+id/Home_Image_View"
+        app:layout_constraintVertical_bias="0.49"
         app:srcCompat="@drawable/ic_setting"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -128,6 +139,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:layout_marginBottom="86dp"
+        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plan_id"
@@ -137,7 +150,7 @@
         android:id="@+id/line_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/plan_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/eat_id"
@@ -147,7 +160,7 @@
         android:id="@+id/line_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/eat_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hike_id"
@@ -157,7 +170,7 @@
         android:id="@+id/line_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/hike_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/review_id"
@@ -167,12 +180,12 @@
         android:id="@+id/line_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toTopOf="@+id/review_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_roude_id"
-        app:srcCompat="@drawable/ic_line_1"
-        android:contentDescription="@string/todo" />
+        app:srcCompat="@drawable/ic_line_1" />
 
     <Button
         android:id="@+id/button"
@@ -184,6 +197,7 @@
         android:text="@string/start"
         android:textColor="@color/black"
         android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"

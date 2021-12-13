@@ -76,7 +76,7 @@ class MainActivity_DD : AppCompatActivity() {
         }
     }
 }
-
+// #TODO: убрать ActionBar вверху экрана, открывается при onStop, onResume, onPause by Nikita
 // #TODO: найти атрибут, отвечающий за перемещение элементов в списке.
 // #TODO: разобраться, как работает этот чёртов ChipGroup (как нормально выравнивать элементы?).
 // #TODO: сделать RecyclerView для списка участников.
