@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainScreeen"
+
+    tools:context=".MainScreen"
     android:background="@color/my_color">
 
     <TextView
         android:id="@+id/new_roude_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="116dp"
         android:fontFamily="@font/aqum_classic"
         android:gravity="center"
@@ -20,24 +21,26 @@
         android:translationZ="4sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHeight_percent="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.095" />
+        app:layout_constraintVertical_bias="0.095"
+        app:layout_constraintWidth_percent="0.74" />
+
 
     <TextView
         android:id="@+id/plan_id"
-        android:layout_width="159dp"
-        android:layout_height="30dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintWidth_percent="0.45"
         android:layout_marginTop="60dp"
-        android:layout_marginBottom="15dp"
         android:fontFamily="@font/aqum_classic"
         android:gravity="center"
         android:text="@string/roude"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:translationZ="4sp"
-        app:layout_constraintBottom_toTopOf="@+id/line_5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/eat_id"
@@ -45,8 +48,8 @@
 
     <TextView
         android:id="@+id/hike_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="60dp"
         android:fontFamily="@font/aqum_classic"
         android:gravity="center"
@@ -55,14 +58,15 @@
         android:textSize="28sp"
         android:translationZ="4sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHeight_percent="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/review_id" />
+        app:layout_constraintTop_toBottomOf="@+id/review_id"
+        app:layout_constraintWidth_percent="0.95" />
 
     <TextView
         android:id="@+id/eat_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="60dp"
         android:fontFamily="@font/aqum_classic"
         android:gravity="center"
@@ -71,14 +75,17 @@
         android:textSize="30sp"
         android:translationZ="4sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHeight_percent="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hike_id" />
+        app:layout_constraintTop_toBottomOf="@+id/hike_id"
+        app:layout_constraintWidth_percent="0.45" />
 
     <TextView
         android:id="@+id/review_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintWidth_percent="0.86"
         android:layout_marginTop="60dp"
         android:fontFamily="@font/aqum_classic"
         android:gravity="center"
@@ -92,116 +99,82 @@
 
     <ImageView
         android:id="@+id/Home_Image_View"
-        android:layout_width="94dp"
-        android:layout_height="102dp"
-        android:layout_marginBottom="30dp"
-        android:contentDescription="@string/home"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toTopOf="@+id/new_roude_id"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHeight_percent="0.13"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.29"
         app:srcCompat="@drawable/ic_home" />
 
-    <ImageButton
-        android:id="@+id/back_view_icon_id"
-        android:layout_width="44dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="23dp"
-        android:background="#00000000"
-        android:contentDescription="@string/back"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Home_Image_View"
-        app:srcCompat="@drawable/ic_back"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+<!--    <ImageView-->
+<!--        android:id="@+id/line_5"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/button"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/plan_id"-->
+<!--        app:srcCompat="@drawable/ic_line_2" />-->
 
-    <ImageButton
-        android:id="@+id/setting_icon_id"
-        android:layout_width="49dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="#00000000"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/Home_Image_View"
-        app:layout_constraintTop_toTopOf="@+id/Home_Image_View"
-        app:layout_constraintVertical_bias="0.49"
-        app:srcCompat="@drawable/ic_setting"
-        tools:ignore="SpeakableTextPresentCheck" />
+<!--    <ImageView-->
+<!--        android:id="@+id/line_4"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/plan_id"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/eat_id"-->
+<!--        app:srcCompat="@drawable/ic_line_4" />-->
 
-    <ImageView
-        android:id="@+id/line_5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="86dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plan_id"
-        app:srcCompat="@drawable/ic_line_2" />
+<!--    <ImageView-->
+<!--        android:id="@+id/line_3"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/eat_id"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/hike_id"-->
+<!--        app:srcCompat="@drawable/ic_line_3" />-->
 
-    <ImageView
-        android:id="@+id/line_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/plan_id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eat_id"
-        app:srcCompat="@drawable/ic_line_4" />
+<!--    <ImageView-->
+<!--        android:id="@+id/line_2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/hike_id"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/review_id"-->
+<!--        app:srcCompat="@drawable/ic_line_5" />-->
 
-    <ImageView
-        android:id="@+id/line_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/eat_id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hike_id"
-        app:srcCompat="@drawable/ic_line_3" />
-
-    <ImageView
-        android:id="@+id/line_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/hike_id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/review_id"
-        app:srcCompat="@drawable/ic_line_5" />
-
-    <ImageView
-        android:id="@+id/line_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/todo"
-        app:layout_constraintBottom_toTopOf="@+id/review_id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_roude_id"
-        app:srcCompat="@drawable/ic_line_1" />
+<!--    <ImageView-->
+<!--        android:id="@+id/line_1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:contentDescription="@string/todo"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/review_id"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/new_roude_id"-->
+<!--        app:srcCompat="@drawable/ic_line_1" />-->
 
     <Button
         android:id="@+id/button"
-        android:layout_width="348dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="84dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/ic_start_buttom"
         android:fontFamily="@font/aqum_classic"
         android:text="@string/start"
         android:textColor="@color/black"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHeight_percent="0.093"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plan_id" />
+        app:layout_constraintTop_toBottomOf="@+id/plan_id"
+        app:layout_constraintWidth_percent="0.9" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
