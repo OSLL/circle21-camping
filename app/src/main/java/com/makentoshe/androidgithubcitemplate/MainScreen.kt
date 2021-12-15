@@ -72,15 +72,15 @@ class MainScreen : AppCompatActivity() {
             toastMaker("Начать", mediaPlayer)
         }
 
-        val backImageButton: ImageButton = findViewById(R.id.back_view_icon_id)
-        backImageButton.setOnClickListener {
-            toastMaker("Назад", mediaPlayer)
-        }
+//        val backImageButton: ImageButton = findViewById(R.id.back_view_icon_id)
+//        backImageButton.setOnClickListener {
+//            toastMaker("Назад", mediaPlayer)
+//        }
 
-        val settingImageButton: ImageButton = findViewById(R.id.setting_icon_id)
-        settingImageButton.setOnClickListener {
-            toastMaker("Настройки", mediaPlayer)
-        }
+//        val settingImageButton: ImageButton = findViewById(R.id.setting_icon_id)
+//        settingImageButton.setOnClickListener {
+//            toastMaker("Настройки", mediaPlayer)
+//        }
     }
 
     @RequiresApi(Build.VERSION_CODES.HONEYCOMB)
@@ -101,4 +101,3 @@ class MainScreen : AppCompatActivity() {
         noActionBarAndBottomNavigation()
     }
 }
-
