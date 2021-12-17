@@ -1,10 +1,12 @@
 package com.makentoshe.androidgithubcitemplate
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.DisplayMetrics
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -12,9 +14,7 @@ import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
-import org.osmdroid.views.overlay.Marker
-import org.osmdroid.views.overlay.MinimapOverlay
-import org.osmdroid.views.overlay.ScaleBarOverlay
+import org.osmdroid.views.overlay.*
 import org.osmdroid.views.overlay.compass.CompassOverlay
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider
 import org.osmdroid.views.overlay.gestures.RotationGestureOverlay
@@ -22,14 +22,33 @@ import org.osmdroid.views.overlay.gridlines.LatLonGridlineOverlay2
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 import java.util.*
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
+import androidx.annotation.RequiresApi
+import org.osmdroid.bonuspack.routing.OSRMRoadManager
+import org.osmdroid.bonuspack.routing.Road
+
+import org.osmdroid.bonuspack.routing.RoadManager
+import org.osmdroid.views.overlay.Polyline
+
+
+
+
+
+
+
 
 class MainActivity : AppCompatActivity() {
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 1;
 
 
     private lateinit var map : MapView;
+    @RequiresApi(Build.VERSION_CODES.GINGERBREAD)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
+        val policy = ThreadPolicy.Builder().permitAll().build()
+        Configuration.getInstance().setUserAgentValue("MyOwnUserAgent/1.0");
+        StrictMode.setThreadPolicy(policy)
 
         //handle permissions first, before map is created. not depicted here
 
@@ -92,8 +111,24 @@ class MainActivity : AppCompatActivity() {
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
         map.overlays.add(marker)
         map.invalidate()
+        val roadManager: RoadManager = OSRMRoadManager(this, MY_USER_AGENT)
+        (roadManager as OSRMRoadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE)
+        var geoPoints = ArrayList<GeoPoint>();
+        geoPoints.add(startPoint)
+        val endPoint = GeoPoint(60.9333, 31.3)
+        geoPoints.add(endPoint)
+        val line = Polyline();   //see note below!
+        var road = roadManager.getRoad(geoPoints)
+        val roadOverlay = RoadManager.buildRoadOverlay(road)
+        map.getOverlays().add(roadOverlay);
+        map.invalidate();
+        line.setOnClickListener { pl, mv, gp ->
+        Toast.makeText(map.context, "polyline with " + line.actualPoints.size + " pts was tapped", Toast.LENGTH_LONG).show()
+            return@setOnClickListener false
+        }
+    map.overlays.add(line);
 
-    }
+}
 
 
     override fun onResume() {
