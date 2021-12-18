@@ -12,7 +12,7 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 
-class MainScreen : AppCompatActivity() {
+class MainScreen : AppCompatActivity(), View.OnClickListener {
     @RequiresApi(Build.VERSION_CODES.HONEYCOMB)
     fun noActionBarAndBottomNavigation () {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -26,6 +26,7 @@ class MainScreen : AppCompatActivity() {
             }
         }
     }
+
     @RequiresApi(Build.VERSION_CODES.HONEYCOMB)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +66,8 @@ class MainScreen : AppCompatActivity() {
         val textButton5: TextView = findViewById(R.id.eat_id)
         textButton5.setOnClickListener {
             toastMaker("Еда", mediaPlayer)
+            intent = Intent(this, First_main_activity::class.java)
+            startActivity(intent)
         }
 
         val buttonStart: Button = findViewById(R.id.button)
@@ -100,4 +103,10 @@ class MainScreen : AppCompatActivity() {
         super.onStop()
         noActionBarAndBottomNavigation()
     }
+
+    override fun onClick(v: View?) {
+        TODO("Not yet implemented")
+    }
+
+
 }

@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="Список вещей:"
             android:textColor="@android:color/black"
-            android:textSize="35dp" />
+            android:textSize="35sp" />
 
         <CheckBox
             android:id="@+id/checkBox"
@@ -30,28 +30,32 @@
             android:layout_height="wrap_content"
             android:isScrollContainer="false"
             android:text="Палатка"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <CheckBox
             android:id="@+id/checkBox1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Термос"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <CheckBox
             android:id="@+id/checkBox2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Хлеб"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <CheckBox
             android:id="@+id/checkBox3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Фонарик"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <CheckBox
             android:id="@+id/checkBox4"
@@ -62,7 +66,7 @@
             android:clickable="false"
             android:text="Новый пункт"
             android:textColor="#B3000000"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
     </com.google.android.material.chip.ChipGroup>
 
@@ -74,7 +78,7 @@
         android:layout_marginTop="15dp"
         android:text="Список участников:"
         android:textColor="@android:color/black"
-        android:textSize="35dp"
+        android:textSize="35sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chipGroup"
         android:layout_marginLeft="25dp" />
