@@ -10,4 +10,9 @@
     <string name="todo">TODO</string>
     <string name="home">HOME</string>
     <string name="back">Back</string>
+    <string name="the_participants">Участники :</string>
+    <string name="your_hike">Вы в походе</string>
+    <string name="workload">Загруженность :</string>
+    <string name="rest">Отдых :</string>
+    <string name="enter_your_name">Введите свое имя</string>
 </resources>
