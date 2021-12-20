@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="44dp"
-        android:text="Список вещей:"
+        android:text="Список вещей"
         android:textColor="@android:color/white"
         android:textSize="35sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="36dp"
-        android:text="Список участников:"
+        android:text="Список участников"
         android:textColor="@android:color/white"
         android:textSize="35sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -160,5 +160,14 @@
         app:layout_constraintHorizontal_bias="0.695"
         app:layout_constraintStart_toEndOf="@+id/checkBox3"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:rotation="180"
+        app:srcCompat="@drawable/ic_vector_2_"
+        tools:layout_editor_absoluteX="343dp"
+        tools:layout_editor_absoluteY="26dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
