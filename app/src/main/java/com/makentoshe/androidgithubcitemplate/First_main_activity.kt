@@ -1,44 +1,59 @@
 package com.makentoshe.androidgithubcitemplate
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
-import androidx.recyclerview.widget.GridLayoutManager
-import com.makentoshe.androidgithubcitemplate.databinding.ActivityMainBinding
+import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_first_main_activite.*
+import java.util.ArrayList
 
 class First_main_activity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
-    private val personIdName = listOf("Сергей Петрович", "Ренат Бахримов", "Ибрагим Даланович", "Никита Сосно", "Егор Махиров")
-    private var adapter = PersonsAdapter()
-    private var index = 0
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        init()
-    }
-    override   fun   onWindowFocusChanged  ( hasFocus :   Boolean ) {
-        super .onWindowFocusChanged(hasFocus)
-        WindowCompat .setDecorFitsSystemWindows(window,  false )
-        WindowInsetsControllerCompat (window, findViewById<ConstraintLayout>( R .id.constraint)). let  {
-            it.hide( WindowInsetsCompat . Type .systemBars())
-            it.systemBarsBehavior  =   WindowInsetsControllerCompat . BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        }
-    }
-    private fun init () {
-        binding.apply {
-            personList.layoutManager = GridLayoutManager (this@First_main_activity,2)
-            personList.adapter = adapter
-            button3.setOnClickListener {
-                if (index > 2) index = 0
-                val person = dataPersons(personIdName[index])
-                adapter.addPerson(person)
-                index++
+    private fun noActionBarAndBottomNavigation () {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
             }
         }
     }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        noActionBarAndBottomNavigation()
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_first_main_activite)
+    val data2 : MutableList<Person_d> = ArrayList()
+    for (i in 1..10)
+        data2.add(Person_d("Имя Фамилия $i"))
+
+    val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+    val adapter = PersonsAdapter(data2)
+    recycler_view_id.layoutManager = layoutManager
+    recycler_view_id.setHasFixedSize(true)
+    recycler_view_id.adapter = adapter
+    }
+
+    override fun onPause() {
+        noActionBarAndBottomNavigation ()
+        super.onPause()
+    }
+
+    override fun onStart() {
+        noActionBarAndBottomNavigation ()
+        super.onStart()
+    }
+
+    override fun onResume() {
+        noActionBarAndBottomNavigation ()
+        super.onResume()
+    }
+
+    override fun onStop() {
+        noActionBarAndBottomNavigation ()
+        super.onStop()
+    }
 }
+
