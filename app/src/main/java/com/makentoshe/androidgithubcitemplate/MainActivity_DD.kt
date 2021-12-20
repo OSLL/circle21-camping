@@ -1,12 +1,15 @@
 package com.makentoshe.androidgithubcitemplate
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_main_dd.*
+import java.util.ArrayList
 
 class MainActivity_DD : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,14 +17,16 @@ class MainActivity_DD : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_dd)
 
-        val add_participant:ImageView = findViewById(R.id.imageView)
-        val to_route_plan:Button = findViewById(R.id.button)
+//        val add_participant:ImageView = findViewById(R.id.imageView)
+        val to_route_plan:Button = findViewById(R.id.button_go_map)
         to_route_plan.setOnClickListener {
             Log.d("TAG", "При нажатии на кнопку должен происходить переход к другой активити.")
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
         }
-        add_participant.setOnClickListener {
-            Log.d("TAG", "Пока что ничего не происходит (см. TODO)")
-        }
+//        add_participant.setOnClickListener {
+//            Log.d("TAG", "Пока что ничего не происходит (см. TODO)")
+//        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -32,7 +37,16 @@ class MainActivity_DD : AppCompatActivity() {
                         or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
             }
         }
+        val data2 : MutableList<Person_d> = ArrayList()
+        for (i in 1..10)
+            data2.add(Person_d("Добавить участника $i"))
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+        val adapter = PersonsPreparetion_Adapter(data2)
+        recycler_view_id2.layoutManager = layoutManager
+        recycler_view_id2.setHasFixedSize(true)
+        recycler_view_id2.adapter = adapter
     }
+
     override fun onResume() {
         super.onResume()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {

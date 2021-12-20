@@ -6,39 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity_DD">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="190dp"
-        android:layout_height="250dp"
-        android:layout_marginVertical="240dp"
-        app:cardBackgroundColor="#4FB84D"
-        app:cardCornerRadius="33sp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.113"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.51">
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="23dp"
-            android:layout_weight="1"
-            android:text="Добавить участника"
-            android:textAlignment="center"
-            android:textSize="18sp" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
@@ -60,6 +27,24 @@
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/checkBox"
         tools:ignore="TouchTargetSizeCheck" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_id2"
+        android:layout_width="match_parent"
+        android:layout_height="288dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="7dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/button_go_map"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <CheckBox
         android:id="@+id/checkBox2"
@@ -119,7 +104,7 @@
         app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_go_map"
         android:layout_width="293dp"
         android:layout_height="67dp"
         android:layout_marginBottom="32dp"
