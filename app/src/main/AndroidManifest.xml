@@ -20,14 +20,11 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/icon_for_camping"
-        android:label="Camping assistant"
+        android:label="CampingAssistant"
         android:roundIcon="@mipmap/icon_for_camping"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat"
         tools:ignore="AllowBackup">
-        <activity
-            android:name=".preparation_person"
-            android:exported="false" />
         <activity
             android:name=".First_main_activity"
             android:exported="true"

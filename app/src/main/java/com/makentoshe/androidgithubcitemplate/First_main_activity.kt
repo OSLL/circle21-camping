@@ -1,9 +1,11 @@
 package com.makentoshe.androidgithubcitemplate
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_first_main_activite.*
 import java.util.ArrayList
@@ -28,6 +30,11 @@ class First_main_activity : AppCompatActivity() {
     val data2 : MutableList<Person_d> = ArrayList()
     for (i in 1..10)
         data2.add(Person_d("Имя Фамилия $i"))
+        val bth_roude : Button = findViewById(R.id.route_button)
+        bth_roude.setOnClickListener{
+            val intent = Intent (this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
     val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
     val adapter = PersonsAdapter(data2)
