@@ -32,48 +32,57 @@ class MainScreen : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
         noActionBarAndBottomNavigation()
-        fun toastMaker (text: String?, mediaPlayer : MediaPlayer) {
-            Toast.makeText(applicationContext,text, Toast.LENGTH_SHORT).show()
-            mediaPlayer.start()
-        }
-        val mediaPlayer = MediaPlayer.create(this, R.raw.button_click_sound)
-        AnimationUtils.loadAnimation(this, R.anim.line_up)
-        val textButton: TextView = findViewById(R.id.new_roude_id)
-        textButton.setOnClickListener {
-        toastMaker("Заметки",mediaPlayer)
-        }
+//        fun toastMaker (text: String?, mediaPlayer : MediaPlayer) {
+//            Toast.makeText(applicationContext,text, Toast.LENGTH_SHORT).show()
+//            mediaPlayer.start()
 
-        // Тут при нажатии на текст "Новая заметка" , будет всплывать уведомление
-        val textButton2: TextView = findViewById(R.id.plan_id)
-        textButton2.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            mediaPlayer.start()
-        }
+    val button_menu : Button = findViewById(R.id.button2)
+    button_menu.setOnClickListener{
+        val intent = Intent(this,MainActivity_DD::class.java)
+        startActivity(intent)
+    }
 
-        val textButton3: TextView = findViewById(R.id.review_id)
-        textButton3.setOnClickListener {
-            toastMaker("Советы и отзывы", mediaPlayer)
-        }
 
-        val textButton4: TextView = findViewById(R.id.hike_id)
-        textButton4.setOnClickListener {
-            val intent = Intent(this, MainActivity_DD::class.java)
-            startActivity(intent)
-            mediaPlayer.start()
-        }
+    }
 
-        val textButton5: TextView = findViewById(R.id.eat_id)
-        textButton5.setOnClickListener {
-            toastMaker("Еда", mediaPlayer)
-            intent = Intent(this, First_main_activity::class.java)
-            startActivity(intent)
-        }
-
-        val buttonStart: Button = findViewById(R.id.button)
-        buttonStart.setOnClickListener {
-            toastMaker("Начать", mediaPlayer)
-        }
+//        val mediaPlayer = MediaPlayer.create(this, R.raw.button_click_sound)
+//        AnimationUtils.loadAnimation(this, R.anim.line_up)
+//        val textButton: TextView = findViewById(R.id.new_roude_id)
+//        textButton.setOnClickListener {
+//        toastMaker("Заметки",mediaPlayer)
+//        }
+//
+//        // Тут при нажатии на текст "Новая заметка" , будет всплывать уведомление
+//        val textButton2: TextView = findViewById(R.id.plan_id)
+//        textButton2.setOnClickListener {
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//            mediaPlayer.start()
+//        }
+//
+//        val textButton3: TextView = findViewById(R.id.review_id)
+//        textButton3.setOnClickListener {
+//            toastMaker("Советы и отзывы", mediaPlayer)
+//        }
+//
+//        val textButton4: TextView = findViewById(R.id.hike_id)
+//        textButton4.setOnClickListener {
+//            val intent = Intent(this, MainActivity_DD::class.java)
+//            startActivity(intent)
+//            mediaPlayer.start()
+//        }
+//
+//        val textButton5: TextView = findViewById(R.id.eat_id)
+//        textButton5.setOnClickListener {
+//            toastMaker("Еда", mediaPlayer)
+//            intent = Intent(this,First_main_activity::class.java)
+//            startActivity(intent)
+//        }
+//
+//        val buttonStart: Button = findViewById(R.id.button)
+//        buttonStart.setOnClickListener {
+//            toastMaker("Начать", mediaPlayer)
+//        }
 
 //        val backImageButton: ImageButton = findViewById(R.id.back_view_icon_id)
 //        backImageButton.setOnClickListener {
@@ -84,7 +93,7 @@ class MainScreen : AppCompatActivity(), View.OnClickListener {
 //        settingImageButton.setOnClickListener {
 //            toastMaker("Настройки", mediaPlayer)
 //        }
-    }
+
 
     @RequiresApi(Build.VERSION_CODES.HONEYCOMB)
     override fun onResume() {

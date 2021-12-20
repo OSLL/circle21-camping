@@ -4,177 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    tools:context=".MainScreen"
-    android:background="@color/my_color">
-
-    <TextView
-        android:id="@+id/new_roude_id"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="116dp"
-        android:fontFamily="@font/aqum_classic"
-        android:gravity="center"
-        android:text="@string/new_bottom"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:translationZ="4sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.095"
-        app:layout_constraintWidth_percent="0.74" />
-
-
-    <TextView
-        android:id="@+id/plan_id"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintWidth_percent="0.45"
-        android:layout_marginTop="60dp"
-        android:fontFamily="@font/aqum_classic"
-        android:gravity="center"
-        android:text="@string/roude"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:translationZ="4sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eat_id"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <TextView
-        android:id="@+id/hike_id"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="60dp"
-        android:fontFamily="@font/aqum_classic"
-        android:gravity="center"
-        android:text="@string/hike"
-        android:textColor="@color/white"
-        android:textSize="28sp"
-        android:translationZ="4sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/review_id"
-        app:layout_constraintWidth_percent="0.95" />
-
-    <TextView
-        android:id="@+id/eat_id"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="60dp"
-        android:fontFamily="@font/aqum_classic"
-        android:gravity="center"
-        android:text="@string/eat"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:translationZ="4sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hike_id"
-        app:layout_constraintWidth_percent="0.45" />
-
-    <TextView
-        android:id="@+id/review_id"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintWidth_percent="0.86"
-        android:layout_marginTop="60dp"
-        android:fontFamily="@font/aqum_classic"
-        android:gravity="center"
-        android:text="@string/review"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:translationZ="4sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_roude_id" />
-
-    <ImageView
-        android:id="@+id/Home_Image_View"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/new_roude_id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.13"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.29"
-        app:srcCompat="@drawable/ic_home" />
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/line_5"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/button"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/plan_id"-->
-    <!--        app:srcCompat="@drawable/ic_line_2" />-->
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/line_4"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/plan_id"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/eat_id"-->
-    <!--        app:srcCompat="@drawable/ic_line_4" />-->
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/line_3"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/eat_id"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/hike_id"-->
-    <!--        app:srcCompat="@drawable/ic_line_3" />-->
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/line_2"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/hike_id"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/review_id"-->
-    <!--        app:srcCompat="@drawable/ic_line_5" />-->
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/line_1"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:contentDescription="@string/todo"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/review_id"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/new_roude_id"-->
-    <!--        app:srcCompat="@drawable/ic_line_1" />-->
+    android:background="@color/background">
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/ic_start_buttom"
-        android:fontFamily="@font/aqum_classic"
-        android:text="@string/start"
-        android:textColor="@color/black"
-        android:textSize="30sp"
+        android:id="@+id/button2"
+        android:layout_width="305dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="75dp"
+        android:background="@color/green"
+        android:text="@string/new_hike2"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.093"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plan_id"
-        app:layout_constraintWidth_percent="0.9" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="220dp"
+        android:text="@string/text_main_menu1"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="366dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="19dp"
+        android:text="@string/text_main_menu2"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.644"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
