@@ -6,12 +6,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <org.osmdroid.views.MapView android:id="@+id/map"
+    <org.osmdroid.views.MapView
+        android:id="@+id/map"
+        tilesource="Mapnik"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        tilesource="Mapnik" >
+        android:layout_height="fill_parent">
 
 
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/backblack" />
     </org.osmdroid.views.MapView>
 
     <TextView
@@ -36,18 +48,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/move_button"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="5dp"
-            android:backgroundTint="@android:color/darker_gray"
-            android:text="move"
-            android:textColor="@color/black"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp" />
-
 
         <Button
             android:id="@+id/delete_button"
@@ -60,6 +60,18 @@
             android:textColor="@color/black"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="10dp" />
+
+        <Button
+            android:id="@+id/move_button"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:backgroundTint="@android:color/darker_gray"
+            android:text="move"
+            android:textColor="@color/black" />
 
     </LinearLayout>
 

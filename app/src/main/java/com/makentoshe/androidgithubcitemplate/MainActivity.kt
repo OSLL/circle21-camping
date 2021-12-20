@@ -30,6 +30,31 @@ import org.osmdroid.bonuspack.routing.Road
 
 import org.osmdroid.bonuspack.routing.RoadManager
 import org.osmdroid.views.overlay.Polyline
+import org.osmdroid.views.overlay.OverlayItem
+
+import org.osmdroid.views.overlay.ItemizedIconOverlay
+import org.osmdroid.views.overlay.ItemizedIconOverlay.OnItemGestureListener
+
+import org.osmdroid.views.overlay.ItemizedOverlayWithFocus
+import org.osmdroid.bonuspack.kml.KmlDocument
+import org.osmdroid.views.overlay.Marker
+
+import org.osmdroid.views.overlay.Marker.OnMarkerDragListener
+import org.osmdroid.views.overlay.MapEventsOverlay
+
+import org.osmdroid.events.MapEventsReceiver
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -76,6 +101,32 @@ class MainActivity : AppCompatActivity() {
 
         map = findViewById<MapView>(R.id.map)
         map.setTileSource(TileSourceFactory.MAPNIK);
+        class OnMarkerDragListenerDrawer : OnMarkerDragListener {
+            var mTrace: ArrayList<GeoPoint>
+            var mPolyline: Polyline
+            override fun onMarkerDrag(marker: Marker) {
+                //mTrace.add(marker.getPosition());
+            }
+
+            override fun onMarkerDragEnd(marker: Marker) {
+                mTrace.add(marker.position)
+                mPolyline.setPoints(mTrace)
+                map.invalidate()
+            }
+
+            override fun onMarkerDragStart(marker: Marker) {
+                //mTrace.add(marker.getPosition());
+            }
+
+            init {
+                mTrace = ArrayList(100)
+                mPolyline = Polyline()
+                mPolyline.color = -0x55ffff01
+                mPolyline.width = 2.0f
+                mPolyline.isGeodesic = true
+                map.overlays.add(mPolyline)
+            }
+        }
         val mapController = map.controller
         mapController.setZoom(10.5)
         val startPoint = GeoPoint(59.9333, 30.3);
@@ -106,27 +157,57 @@ class MainActivity : AppCompatActivity() {
         map.overlays.add(minimapOverlay);
         val marker = Marker(map)
         marker.position = GeoPoint(59.9333, 30.3)
+        marker.setDraggable(true)
+        marker.setOnMarkerDragListener(OnMarkerDragListenerDrawer())
         marker.icon = ContextCompat.getDrawable(this, R.drawable.maker_icon)
         marker.title = "Test Marker"
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
         map.overlays.add(marker)
         map.invalidate()
-        val roadManager: RoadManager = OSRMRoadManager(this, MY_USER_AGENT)
-        (roadManager as OSRMRoadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE)
         var geoPoints = ArrayList<GeoPoint>();
         geoPoints.add(startPoint)
         val endPoint = GeoPoint(60.9333, 31.3)
         geoPoints.add(endPoint)
         val line = Polyline();   //see note below!
-        var road = roadManager.getRoad(geoPoints)
+        map.invalidate();
+        val roadManager: RoadManager = OSRMRoadManager(this, BuildConfig.APPLICATION_ID)
+        (roadManager as OSRMRoadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE)
+        val road = roadManager.getRoad(geoPoints)
         val roadOverlay = RoadManager.buildRoadOverlay(road)
         map.getOverlays().add(roadOverlay);
+        val mReceive: MapEventsReceiver = object : MapEventsReceiver {
+            override fun singleTapConfirmedHelper(p: GeoPoint): Boolean {
+                Toast.makeText(
+                    baseContext,
+                    p.latitude.toString() + " - " + p.longitude,
+                    Toast.LENGTH_LONG
+                ).show()
+                marker.position = GeoPoint(p.latitude, p.longitude)
+                marker.setDraggable(true)
+                marker.setOnMarkerDragListener(OnMarkerDragListenerDrawer())
+                marker.icon = ContextCompat.getDrawable(this@MainActivity, R.drawable.maker_icon)
+                marker.title = "Test Marker"
+                marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
+                map.overlays.add(marker)
+                map.invalidate()
+
+
+                return false
+            }
+
+            override fun longPressHelper(p: GeoPoint): Boolean {
+                return false
+            }
+        }
+        map.overlays.add(MapEventsOverlay(mReceive))
         map.invalidate();
         line.setOnClickListener { pl, mv, gp ->
         Toast.makeText(map.context, "polyline with " + line.actualPoints.size + " pts was tapped", Toast.LENGTH_LONG).show()
             return@setOnClickListener false
         }
     map.overlays.add(line);
+
+
 
 }
 
@@ -148,6 +229,34 @@ class MainActivity : AppCompatActivity() {
                         or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
             }
         }
+        val items = ArrayList<OverlayItem>()
+        items.add(
+            OverlayItem(
+                "Title",
+                "Description",
+                GeoPoint(0.0, 0.0)
+            )
+        ) // Lat/Lon decimal degrees
+
+
+//the overlay
+
+//the overlay
+        val mOverlay = ItemizedOverlayWithFocus<OverlayItem>(items,
+            object : OnItemGestureListener<OverlayItem?> {
+                override fun onItemSingleTapUp(index: Int, item: OverlayItem?): Boolean {
+                    //do something
+                    return true
+                }
+
+                override fun onItemLongPress(index: Int, item: OverlayItem?): Boolean {
+                    return false
+                }
+            }, this
+        )
+        mOverlay.setFocusItemsOnTap(true)
+
+        map.getOverlays().add(mOverlay)
     }
 
     override fun onPause() {
