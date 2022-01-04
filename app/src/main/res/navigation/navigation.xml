@@ -7,7 +7,7 @@
 
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.makentoshe.androidgithubcitemplate.MainActivity"
+        android:name="com.makentoshe.androidgithubcitemplate.activity.MainActivity"
         android:label="MainActivity" />
     <navigation android:id="@+id/navigation4"
         app:startDestination="@id/mainScreeen">
@@ -33,7 +33,7 @@
     </navigation>
     <activity
         android:id="@+id/mainActivity_DD"
-        android:name="com.makentoshe.androidgithubcitemplate.MainActivity_DD"
+        android:name="com.makentoshe.androidgithubcitemplate.activity.MainActivity_DD"
         android:label="activity_main_dd"
         tools:layout="@layout/activity_main_dd" />
 </navigation>

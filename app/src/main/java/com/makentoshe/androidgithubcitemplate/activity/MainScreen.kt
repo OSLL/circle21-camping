@@ -1,4 +1,4 @@
-package com.makentoshe.androidgithubcitemplate
+package com.makentoshe.androidgithubcitemplate.activity
 
 
 import android.content.Intent
@@ -9,7 +9,7 @@ import android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main_screen.*
+import com.makentoshe.androidgithubcitemplate.R
 
 class MainScreen : AppCompatActivity(), View.OnClickListener {
 
@@ -38,7 +38,7 @@ class MainScreen : AppCompatActivity(), View.OnClickListener {
 
     val button_menu : Button = findViewById(R.id.button2)
     button_menu.setOnClickListener{
-        val intent = Intent(this,MainActivity_DD::class.java)
+        val intent = Intent(this, MainActivity_DD::class.java)
         startActivity(intent)
     }
 
