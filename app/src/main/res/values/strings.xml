@@ -23,4 +23,6 @@
     <string name="text_main_menu1">Пока что тут пусто</string>
     <string name="text_main_menu2">Начните новый поход, чтобы увидеть информацию о нем</string>
     <string name="new_person_2">Добавить участника</string>
+    <string name="select">Select</string>
+
 </resources>

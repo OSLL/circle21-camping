@@ -1,6 +1,5 @@
 package com.makentoshe.androidgithubcitemplate
 
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -8,7 +7,6 @@ import android.util.DisplayMetrics
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -29,18 +27,12 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import kotlinx.android.synthetic.main.activity_main.*
 import org.osmdroid.bonuspack.routing.OSRMRoadManager
-import org.osmdroid.bonuspack.routing.Road
 
 import org.osmdroid.bonuspack.routing.RoadManager
 import org.osmdroid.views.overlay.Polyline
-import org.osmdroid.views.overlay.OverlayItem
 
-import org.osmdroid.views.overlay.ItemizedIconOverlay
-import org.osmdroid.views.overlay.ItemizedIconOverlay.OnItemGestureListener
-
-import org.osmdroid.views.overlay.ItemizedOverlayWithFocus
-import org.osmdroid.bonuspack.kml.KmlDocument
 import org.osmdroid.views.overlay.Marker
 
 import org.osmdroid.views.overlay.Marker.OnMarkerDragListener
@@ -59,6 +51,7 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.GINGERBREAD)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main)
         val policy = ThreadPolicy.Builder().permitAll().build()
         Configuration.getInstance().setUserAgentValue("MyOwnUserAgent/1.0");
         StrictMode.setThreadPolicy(policy)
@@ -119,6 +112,8 @@ class MainActivity : AppCompatActivity() {
         val mapController = map.controller
         mapController.setZoom(10.5)
         val startPoint = GeoPoint(59.9333, 30.3);
+        map.maxZoomLevel = 20.0
+        map.minZoomLevel = 5.0
         mapController.setCenter(startPoint);
         val locationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(this), map);
         locationOverlay.enableMyLocation();
@@ -186,6 +181,7 @@ class MainActivity : AppCompatActivity() {
                 val road = roadManager.getRoad(geoPoints)
                 val roadOverlay = RoadManager.buildRoadOverlay(road)
                 map.getOverlays().add(roadOverlay);
+
 
 
 
