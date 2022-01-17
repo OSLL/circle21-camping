@@ -1,4 +1,4 @@
-package com.makentoshe.androidgithubcitemplate
+package com.makentoshe.androidgithubcitemplate.activity
 
 import android.os.Build
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.makentoshe.androidgithubcitemplate.R
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
