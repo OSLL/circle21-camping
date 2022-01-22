@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity() {
         mapController.setZoom(10.5)
         val startPoint = GeoPoint(59.9333, 30.3);
         map.maxZoomLevel = 20.0
-        map.minZoomLevel = 5.0
+        map.minZoomLevel = 4.0
         mapController.setCenter(startPoint);
         val locationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(this), map);
         locationOverlay.enableMyLocation();
