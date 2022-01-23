@@ -1,5 +1,6 @@
 package com.makentoshe.androidgithubcitemplate.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -56,6 +57,7 @@ class MainActivity_DD : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun addInfo() {
         val inflter = LayoutInflater.from(this)
         val v = inflter.inflate(R.layout.add_item,null)
@@ -65,29 +67,29 @@ class MainActivity_DD : AppCompatActivity() {
 
         val addDialog = AlertDialog.Builder(this)
 
+
         addDialog.setView(v)
         addDialog.setPositiveButton("Ok"){
                 dialog,_->
             val names = userfirstName.text.toString()
             val lastname = userlastName.text.toString()
+
             recv.layoutManager = layoutManager
             recv.setHasFixedSize(true)
             recv.adapter = adapter
             userList.add(Person_d(names, lastname))
             adapter.notifyDataSetChanged()
-            Toast.makeText(this,"Adding User Information Success",Toast.LENGTH_SHORT).show()
             dialog.dismiss()
         }
         addDialog.setNegativeButton("Cancel"){
                 dialog,_->
             dialog.dismiss()
-            Toast.makeText(this,"Cancel",Toast.LENGTH_SHORT).show()
 
         }
         addDialog.create()
         addDialog.show()
-    }
 
+}
     override fun onRestart() {
         super.onRestart()
         NoActionBar()

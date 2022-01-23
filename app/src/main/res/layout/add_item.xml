@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@color/grey_item"
     >
 
 
@@ -18,7 +19,7 @@
             android:textStyle="bold"
             android:textSize="19sp"
             android:textColor="@color/white"
-            android:background="@color/purple_500"
+            android:background="@color/grey_item2"
             android:padding="10dp"
             android:elevation="15dp"
             android:layout_gravity="center"

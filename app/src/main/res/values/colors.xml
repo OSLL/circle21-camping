@@ -14,4 +14,7 @@
     <color name="grey">#636363</color>
     <color name="background">#535353</color>
     <color name="green">#0AA719</color>
+    <color name="grey_item">#37423F</color>
+    <color name="grey_item2">#1C9BA5</color>
+
 </resources>
