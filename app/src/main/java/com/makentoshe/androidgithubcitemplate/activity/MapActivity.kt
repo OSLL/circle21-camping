@@ -35,9 +35,19 @@ import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.library.BuildConfig
 
 
-class MainActivity : AppCompatActivity() {
-    private val REQUEST_PERMISSIONS_REQUEST_CODE = 1
-
+class MapActivity : AppCompatActivity() {
+    private fun noActionBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY).also { window.decorView.systemUiVisibility = it }
+            }
+        }
+    }
 
     private lateinit var map: MapView
 
@@ -98,14 +108,11 @@ class MainActivity : AppCompatActivity() {
         val dm: DisplayMetrics = this.resources.displayMetrics
         val scaleBarOverlay = ScaleBarOverlay(map)
         scaleBarOverlay.setCentred(true)
-//play around with these values to get the location on screen in the right place for your application
         scaleBarOverlay.setScaleBarOffset(dm.widthPixels / 2, 10)
         map.overlays.add(scaleBarOverlay)
         val minimapOverlay = MinimapOverlay(this, map.tileRequestCompleteHandler)
         minimapOverlay.width = dm.widthPixels / 5
         minimapOverlay.height = dm.heightPixels / 5
-//optionally, you can set the minimap to a different tile source
-//minimapOverlay.setTileSource(....);
         map.overlays.add(minimapOverlay)
         val marker = Marker(map)
         marker.position = GeoPoint(59.9333, 30.3)
@@ -171,22 +178,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        //this will refresh the osmdroid configuration on resuming.
-        //if you make changes to the configuration, use
-        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        //Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this));
-        map.onResume()//needed for compass, my location overlays, v6.0.0 and up
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
-            }
-        }
-
-
+        map.onResume()
+        noActionBar()
     }
 }
