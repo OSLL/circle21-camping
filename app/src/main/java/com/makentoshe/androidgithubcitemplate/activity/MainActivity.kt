@@ -1,5 +1,7 @@
 package com.makentoshe.androidgithubcitemplate.activity
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -23,12 +25,14 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 import java.util.*
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
-import android.util.Log
 import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.makentoshe.androidgithubcitemplate.db.DbManager
+import com.makentoshe.androidgithubcitemplate.db.My_db_helper
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 import org.osmdroid.bonuspack.routing.OSRMRoadManager
 
 import org.osmdroid.bonuspack.routing.RoadManager
@@ -45,10 +49,12 @@ import org.osmdroid.library.BuildConfig
 
 class MainActivity : AppCompatActivity() {
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 1;
+    val DbManager = DbManager(this)
 
 
     private lateinit var map: MapView;
 
+    @SuppressLint("NewApi")
     @RequiresApi(Build.VERSION_CODES.GINGERBREAD)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
@@ -89,7 +95,6 @@ class MainActivity : AppCompatActivity() {
             override fun onMarkerDrag(marker: Marker) {
                 //mTrace.add(marker.getPosition());
             }
-
             override fun onMarkerDragEnd(marker: Marker) {
                 mTrace.add(marker.position)
                 mPolyline.setPoints(mTrace)
@@ -140,6 +145,14 @@ class MainActivity : AppCompatActivity() {
 //optionally, you can set the minimap to a different tile source
 //minimapOverlay.setTileSource(....);
         map.overlays.add(minimapOverlay);
+        val button = Button(this)
+        button.text = "Back"
+        button.setBackgroundColor(Color.GREEN)
+        button.setTextColor(Color.RED)
+        map.addView(button);
+
+
+
         val marker = Marker(map)
         marker.position = GeoPoint(59.9333, 30.3)
         marker.setDraggable(true)
@@ -151,6 +164,26 @@ class MainActivity : AppCompatActivity() {
         map.invalidate()
         var geoPoints = ArrayList<GeoPoint>();
         geoPoints.add(startPoint)
+        DbManager.openDb()
+        val datalist1 = DbManager.ReadDbData1()
+        val datalist2 = DbManager.ReadDbData2()
+        var x = 0
+        for(i in datalist1){
+            marker.position = GeoPoint(i.toDouble(), datalist2[x].toDouble())
+            x+=1
+            marker.title = "$x"
+            map.overlays.add(marker)
+            map.invalidate()
+            geoPoints.add(marker.position)
+            val roadManager: RoadManager = OSRMRoadManager(this@MainActivity, BuildConfig.APPLICATION_ID)
+            (roadManager as OSRMRoadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE)
+            val road = roadManager.getRoad(geoPoints)
+            val roadOverlay = RoadManager.buildRoadOverlay(road)
+            map.getOverlays().add(roadOverlay);
+
+        }
+
+
         val line = Polyline();
         var i = 1
         val mReceive: MapEventsReceiver = object : MapEventsReceiver {
@@ -182,6 +215,10 @@ class MainActivity : AppCompatActivity() {
                 val road = roadManager.getRoad(geoPoints)
                 val roadOverlay = RoadManager.buildRoadOverlay(road)
                 map.getOverlays().add(roadOverlay);
+                DbManager.openDb()
+                DbManager.insertToDb(i.toString(), p.latitude.toString(), p.longitude.toString())
+
+
 
 
 
@@ -230,6 +267,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
 
+    override fun onDestroy()    {
+        super.onDestroy()
+        DbManager.closeDb()
     }
 }
+
+
+
