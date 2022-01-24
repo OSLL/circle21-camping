@@ -2,90 +2,78 @@ package com.makentoshe.androidgithubcitemplate.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.makentoshe.androidgithubcitemplate.R
-import com.makentoshe.androidgithubcitemplate.adapter.PersonsPreparetion_Adapter
-import com.makentoshe.androidgithubcitemplate.data.Person_d
+import com.makentoshe.androidgithubcitemplate.adapter.LastPreparationAdapter
+import com.makentoshe.androidgithubcitemplate.data.dataPerson
+import android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN as FLAG_FULLSCREEN1
 
-class MainActivity_DD : AppCompatActivity() {
+class PreparationActivity : AppCompatActivity() {
+
     private lateinit var addsBtn: FloatingActionButton
     private lateinit var recv: RecyclerView
-    private lateinit var userList:ArrayList<Person_d>
+    private lateinit var userList:MutableList<dataPerson>
     private val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
-    private lateinit var adapter: PersonsPreparetion_Adapter
+    private lateinit var adapter: LastPreparationAdapter
+    private val toRoatplan:Button = findViewById(R.id.button_go_map)
+    private fun NoActionBar () {
+        window.setFlags(FLAG_FULLSCREEN1, FLAG_FULLSCREEN1) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         NoActionBar()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_dd)
-        userList = ArrayList()
+        userList = mutableListOf()
         addsBtn = findViewById(R.id.addindBth)
         recv = findViewById(R.id.recycler_view_id2)
-        addsBtn.setOnClickListener { addInfo() }
-        adapter = PersonsPreparetion_Adapter(userList)
 
-        val to_route_plan:Button = findViewById(R.id.button_go_map)
-        to_route_plan.setOnClickListener {
-            Log.d("TAG", "При нажатии на кнопку должен происходить переход к другой активити.")
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+        addsBtn.setOnClickListener {
+            addInfo()
         }
+        adapter = LastPreparationAdapter(userList)
 
-    }
 
-    private fun NoActionBar () {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
-            }
+        toRoatplan.setOnClickListener {
+            val intent = Intent(this, MapActivity::class.java)
+            startActivity(intent)
         }
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun addInfo() {
+
         val inflter = LayoutInflater.from(this)
-        val v = inflter.inflate(R.layout.add_item,null)
-
-        val userfirstName = v.findViewById<EditText>(R.id.firstName)
-        val userlastName = v.findViewById<EditText>(R.id.lastName)
-
+        val inflate = inflter.inflate(R.layout.add_item,null)
+        val userfirstName = inflate.findViewById<EditText>(R.id.firstName)
+        val userlastName = inflate.findViewById<EditText>(R.id.lastName)
         val addDialog = AlertDialog.Builder(this)
+        val names = userfirstName.text.toString()
+        val lastname = userlastName.text.toString()
 
-
-        addDialog.setView(v)
+        addDialog.setView(inflate)
         addDialog.setPositiveButton("Ok"){
                 dialog,_->
-            val names = userfirstName.text.toString()
-            val lastname = userlastName.text.toString()
-
             recv.layoutManager = layoutManager
             recv.setHasFixedSize(true)
             recv.adapter = adapter
-            userList.add(Person_d(names, lastname))
+            userList.add(dataPerson(names, lastname))
             adapter.notifyDataSetChanged()
             dialog.dismiss()
         }
+
         addDialog.setNegativeButton("Cancel"){
                 dialog,_->
             dialog.dismiss()
-
         }
+
         addDialog.create()
         addDialog.show()
 

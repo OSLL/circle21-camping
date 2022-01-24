@@ -48,37 +48,17 @@ class MainActivity : AppCompatActivity() {
         Configuration.getInstance().userAgentValue = "MyOwnUserAgent/1.0"
         StrictMode.setThreadPolicy(policy)
 
-        //handle permissions first, before map is created. not depicted here
-
-        //load/initialize the osmdroid configuration, this can be done
-        // This won't work unless you have imported this: org.osmdroid.config.Configuration.*
         Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this))
-        //setting this before the layout is inflated is a good idea
-        //it 'should' ensure that the map has a writable location for the map cache, even without permissions
-        //if no tiles are displayed, you can try overriding the cache path using Configuration.getInstance().setCachePath
-        //see also StorageUtils
-        //tile servers will get you banned based on this string.
-        //Убрал Navigation buttons снизу , открываются по свайпу by Nikita Sosno
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
-            }
-        }
-        //inflate and create the map
-        setContentView(R.layout.activity_main);
+
+
+        setContentView(R.layout.activity_main)
 
         map = findViewById(R.id.map)
-        map.setTileSource(TileSourceFactory.MAPNIK);
+        map.setTileSource(TileSourceFactory.MAPNIK)
         class OnMarkerDragListenerDrawer : OnMarkerDragListener {
             var mTrace: ArrayList<GeoPoint> = ArrayList(100)
             var mPolyline: Polyline = Polyline()
             override fun onMarkerDrag(marker: Marker) {
-                //mTrace.add(marker.getPosition());
             }
 
             override fun onMarkerDragEnd(marker: Marker) {
@@ -88,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onMarkerDragStart(marker: Marker) {
-                //mTrace.add(marker.getPosition());
+
             }
 
             init {
@@ -136,7 +116,7 @@ class MainActivity : AppCompatActivity() {
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
         map.overlays.add(marker)
         map.invalidate()
-        val geoPoints = ArrayList<GeoPoint>();
+        val geoPoints = ArrayList<GeoPoint>()
         geoPoints.add(startPoint)
         val line = Polyline()
         var i = 1
@@ -151,7 +131,7 @@ class MainActivity : AppCompatActivity() {
                 marker2.position = GeoPoint(geoPoints[i-1].latitude, geoPoints[i-1].longitude)
                 marker2.isDraggable = true
                 marker2.setOnMarkerDragListener(OnMarkerDragListenerDrawer())
-                marker2.icon = ContextCompat.getDrawable(this@MainActivity, R.drawable.maker_icon)
+                marker2.icon = ContextCompat.getDrawable(this@MapActivity, R.drawable.maker_icon)
                 marker2.title = "$i"
                 i += 1
                 marker2.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
@@ -159,22 +139,16 @@ class MainActivity : AppCompatActivity() {
                 marker.position = GeoPoint(p.latitude, p.longitude)
                 marker.isDraggable = true
                 marker.setOnMarkerDragListener(OnMarkerDragListenerDrawer())
-                marker.icon = ContextCompat.getDrawable(this@MainActivity, R.drawable.maker_icon)
+                marker.icon = ContextCompat.getDrawable(this@MapActivity, R.drawable.maker_icon)
                 marker.title = "$i"
                 marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
                 map.overlays.add(marker)
                 geoPoints.add(marker.position)
-                val roadManager: RoadManager = OSRMRoadManager(this@MainActivity, BuildConfig.APPLICATION_ID)
+                val roadManager: RoadManager = OSRMRoadManager(this@MapActivity, BuildConfig.APPLICATION_ID)
                 (roadManager as OSRMRoadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE)
                 val road = roadManager.getRoad(geoPoints)
                 val roadOverlay = RoadManager.buildRoadOverlay(road)
-                map.overlays.add(roadOverlay);
-
-
-
-
-
-
+                map.overlays.add(roadOverlay)
                 return false
             }
 
@@ -183,8 +157,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
         map.overlays.add(MapEventsOverlay(mReceive))
-        map.invalidate();
-        line.setOnClickListener { pl, mv, gp ->
+        map.invalidate()
+        line.setOnClickListener { _, _, _ ->
             Toast.makeText(
                 map.context,
                 "polyline with " + line.actualPoints.size + " pts was tapped",
@@ -193,10 +167,7 @@ class MainActivity : AppCompatActivity() {
             return@setOnClickListener false
         }
         map.overlays.add(line)
-
-
     }
-
 
     override fun onResume() {
         super.onResume()

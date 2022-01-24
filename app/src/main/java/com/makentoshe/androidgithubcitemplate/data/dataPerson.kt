@@ -2,7 +2,7 @@ package com.makentoshe.androidgithubcitemplate.data
 
 
 
-data class Person_d(
+data class dataPerson(
     val name: String,
     val first_name: String
 )

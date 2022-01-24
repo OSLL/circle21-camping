@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.makentoshe.androidgithubcitemplate.R
-import com.makentoshe.androidgithubcitemplate.data.Person_d
+import com.makentoshe.androidgithubcitemplate.data.dataPerson
 
-class PersonsPreparetion_Adapter(private val userList: ArrayList<Person_d>) : RecyclerView.Adapter<PersonsPreparetion_Adapter.UserViewHolder>() {
+class LastPreparationAdapter(private val userList: MutableList<dataPerson>) : RecyclerView.Adapter<LastPreparationAdapter.UserViewHolder>() {
 
     inner class UserViewHolder(v: View) : RecyclerView.ViewHolder(v){
         val name: TextView = v.findViewById(R.id.name_id)
