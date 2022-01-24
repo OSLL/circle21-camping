@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity_DD">
+    tools:context=".activity.PreparationActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -47,7 +47,8 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.411" />
+        app:layout_constraintVertical_bias="0.411"
+        android:layout_alignParentEnd="true" />
 
     <CheckBox
         android:id="@+id/checkBox2"

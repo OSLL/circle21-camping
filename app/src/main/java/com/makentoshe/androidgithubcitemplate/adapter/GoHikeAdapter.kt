@@ -7,10 +7,10 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.makentoshe.androidgithubcitemplate.R
-import com.makentoshe.androidgithubcitemplate.data.Person_d
+import com.makentoshe.androidgithubcitemplate.data.dataPerson
 import kotlinx.android.synthetic.main.person_item.view.*
 
-class PersonsAdapter(private val data: List<Person_d>) : RecyclerView.Adapter<PersonsAdapter.ViewHolder>() {
+class GoHikeAdapter(private val data: List<dataPerson>) : RecyclerView.Adapter<GoHikeAdapter.ViewHolder>() {
 
 
 

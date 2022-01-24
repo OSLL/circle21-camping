@@ -18,6 +18,7 @@
         tools:ignore="ScopedStorage" />
 
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/icon_for_camping"
         android:label="CampingAssistant"
@@ -26,7 +27,7 @@
         android:theme="@style/Theme.AppCompat"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".activity.First_main_activity"
+            android:name=".activity.GoHikeActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
@@ -37,7 +38,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MainScreen"
+            android:name=".activity.ElementaryActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
@@ -47,7 +48,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MainActivity_DD"
+            android:name=".activity.PreparationActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
@@ -58,7 +59,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.MapActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
