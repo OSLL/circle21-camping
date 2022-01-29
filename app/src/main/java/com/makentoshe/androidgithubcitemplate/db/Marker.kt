@@ -6,8 +6,11 @@ object Marker:BaseColumns {
     const val COLUMN_NAME_TITLE2 = "mlatitude"
     const val COLUMN_NAME_TITLE3 = "mlongitude"
 
+
+
     const val DATABASE_VERSION = 1
     const val DATABASE_NAME = "Markerr.db"
+
 
     const val CREATE_TABLE = "CREATE TABLE IF NOT EXISTS $TABLE_NAME (" +
             "${BaseColumns._ID} INTEGER PRIMARY KEY, $COLUMN_NAME_TITLE1 TEXT," +

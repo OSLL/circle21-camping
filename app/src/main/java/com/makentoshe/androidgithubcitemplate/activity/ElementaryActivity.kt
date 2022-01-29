@@ -24,7 +24,7 @@ class ElementaryActivity : AppCompatActivity(), View.OnClickListener {
         noActionBarAndBottomNavigation()
     val button_menu : Button = findViewById(R.id.button2)
     button_menu.setOnClickListener{
-        val intent = Intent(this, GoHikeActivity::class.java)
+        val intent = Intent(this, MainActivity_DD::class.java)
         startActivity(intent)
     }
 

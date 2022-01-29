@@ -195,7 +195,7 @@ class MainActivity : AppCompatActivity() {
                 ).show()
                 val marker2 = Marker(map)
                 marker2.position = GeoPoint(geoPoints[i-1].latitude, geoPoints[i-1].longitude)
-                marker2.setDraggable(true)
+                marker2.isDraggable = true
                 marker2.setOnMarkerDragListener(OnMarkerDragListenerDrawer())
                 marker2.icon = ContextCompat.getDrawable(this@MainActivity, R.drawable.maker_icon)
                 marker2.title = "$i"

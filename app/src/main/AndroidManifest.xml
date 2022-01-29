@@ -5,7 +5,8 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="NEWEST AVAILABLE" />
+        android:targetSdkVersion="NEWEST AVAILABLE"
+        tools:ignore="GradleOverrides" />
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -18,7 +19,6 @@
         tools:ignore="ScopedStorage" />
 
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/icon_for_camping"
         android:label="CampingAssistant"
@@ -48,7 +48,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.PreparationActivity"
+            android:name=".activity.MainActivity_DD"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
@@ -59,7 +59,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MapActivity"
+            android:name=".activity.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.MainScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.First_main_activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

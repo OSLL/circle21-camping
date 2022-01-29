@@ -59,8 +59,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recycler_view_id2"
         app:layout_constraintVertical_bias="0.100000024"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:layout_marginLeft="15dp" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addindBthEdit"
@@ -74,8 +73,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recycler_view_id2"
         app:layout_constraintVertical_bias="0.38"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:layout_marginLeft="15dp" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addindBthDelete"
@@ -89,8 +87,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recycler_view_id2"
         app:layout_constraintVertical_bias="0.65999997"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:layout_marginLeft="15dp" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -104,8 +101,7 @@
         app:backgroundTint="#643BBD"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:layout_marginRight="16dp" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

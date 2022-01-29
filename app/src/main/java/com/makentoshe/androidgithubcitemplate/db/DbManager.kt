@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import android.icu.text.CaseMap
 
 class DbManager( context: Context) {
     val myDbHelper = My_db_helper(context)
@@ -27,8 +26,7 @@ class DbManager( context: Context) {
 
     @SuppressLint("Range")
     fun ReadDbData1(): ArrayList<String>{
-        val datalist1 = java.util.ArrayList<String>()
-
+        val datalist1 = ArrayList<String>()
         val cursor = db?.query(Marker.TABLE_NAME, null, null, null,
             null, null, null)
 
@@ -42,7 +40,7 @@ class DbManager( context: Context) {
     }
     @SuppressLint("Range")
     fun ReadDbData2(): ArrayList<String>{
-        val datalist2 = java.util.ArrayList<String>()
+        val datalist2 = ArrayList<String>()
 
         val cursor = db?.query(Marker.TABLE_NAME, null, null, null,
             null, null, null)

@@ -7,7 +7,7 @@
     android:layout_marginHorizontal="32dp"
     app:cardBackgroundColor="#4FB84D"
     app:cardCornerRadius="33sp"
-    app:layout_constraintBottom_toTopOf="@+id/button_go_map"
+    app:layout_constraintBottom_toTopOf="@+id/addindBrhGoMap"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.113"
     app:layout_constraintStart_toStartOf="parent"
