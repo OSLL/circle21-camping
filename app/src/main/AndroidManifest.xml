@@ -24,7 +24,7 @@
         android:label="CampingAssistant"
         android:roundIcon="@mipmap/icon_for_camping"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat"
+        android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:ignore="AllowBackup">
         <activity
             android:name=".activity.GoHikeActivity"

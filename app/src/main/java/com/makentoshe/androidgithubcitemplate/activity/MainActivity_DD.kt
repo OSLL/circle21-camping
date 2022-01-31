@@ -3,38 +3,90 @@ package com.makentoshe.androidgithubcitemplate.activity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
+import android.widget.Button
 import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
+import android.widget.FrameLayout
+import android.widget.ImageButton
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.makentoshe.androidgithubcitemplate.R
 import com.makentoshe.androidgithubcitemplate.adapter.LastPreparationAdapter
 import com.makentoshe.androidgithubcitemplate.data.dataPerson
 
+
 class MainActivity_DD : AppCompatActivity() {
-    private lateinit var addsBtn: FloatingActionButton
     private lateinit var recv: RecyclerView
     private lateinit var userList: ArrayList<dataPerson>
     private val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     private lateinit var adapter: LastPreparationAdapter
+    private lateinit var newUser : FloatingActionButton
     private lateinit var addindDthToRoadPlan: FloatingActionButton
 
+    @RequiresApi(Build.VERSION_CODES.HONEYCOMB)
+    fun NoButton() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+                    View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.HONEYCOMB)
+    @SuppressLint("InflateParams", "NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         NoActionBar()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_dd)
+
         userList = ArrayList()
-        addsBtn = findViewById(R.id.addindBthAdd)
+        newUser = findViewById(R.id.addindBthAdd)
         recv = findViewById(R.id.recycler_view_id2)
-        addsBtn.setOnClickListener { addInfo() }
+
+        newUser.setOnClickListener {
+            val dialog = BottomSheetDialog(this)
+            val view = layoutInflater.inflate(R.layout.bottom_sheet_layout,null)
+            val close = view.findViewById<ImageButton>(R.id.close)
+            val btnAddPerson = view.findViewById<Button>(R.id.button_add_person)
+            close.setOnClickListener {
+                dialog.dismiss()
+                NoActionBar()
+            }
+            btnAddPerson.setOnClickListener {
+                NoButton()
+                val inflter = LayoutInflater.from(this)
+                val v = inflter.inflate(R.layout.bottom_sheet_layout, null)
+                val userfirstName = v.findViewById<EditText>(R.id.EditTextfirstname)
+                val userlastName = v.findViewById<EditText>(R.id.editTextTextLastName)
+                val age = v.findViewById<EditText>(R.id.editTextTextAge)
+                recv.layoutManager = layoutManager
+                recv.setHasFixedSize(true)
+                recv.adapter = adapter
+                userList.add(
+                    dataPerson(
+                        "Имя: ${userfirstName.text.toString()}",
+                        "Фамилия: ${userlastName.text.toString()} ",
+                        "Загруженность: ",
+                        "Возраст: ${age.text.toString()} "
+                    )
+                )
+                adapter.notifyDataSetChanged()
+                dialog.dismiss()
+            }
+            dialog.setContentView(view)
+            dialog.show()
+        }
+
         addindDthToRoadPlan = findViewById(R.id.addindBrhGoMap)
         adapter = LastPreparationAdapter(userList)
-
         addindDthToRoadPlan.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -43,45 +95,16 @@ class MainActivity_DD : AppCompatActivity() {
     }
 
     private fun NoActionBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
-            }
-        }
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    private fun addInfo() {
-        val inflter = LayoutInflater.from(this)
-        val v = inflter.inflate(R.layout.add_item, null)
 
-        val userfirstName = v.findViewById<EditText>(R.id.firstName)
-        val userlastName = v.findViewById<EditText>(R.id.lastName)
 
-        val addDialog = AlertDialog.Builder(this)
 
-        addDialog.setView(v)
-        addDialog.setPositiveButton("Ok") { dialog, _ ->
-            val names = userfirstName.text.toString()
-            val lastname = userlastName.text.toString()
-            recv.layoutManager = layoutManager
-            recv.setHasFixedSize(true)
-            recv.adapter = adapter
-            userList.add(dataPerson(names, lastname))
-            adapter.notifyDataSetChanged()
-            dialog.dismiss()
-            addDialog.setNegativeButton("Cancel") { dialog, _ ->
-                dialog.dismiss()
-            }
-            addDialog.create()
-            addDialog.show()
-        }
-    }
+
         override fun onRestart() {
             super.onRestart()
             NoActionBar()
