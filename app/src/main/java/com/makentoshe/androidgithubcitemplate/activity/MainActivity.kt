@@ -1,6 +1,7 @@
 package com.makentoshe.androidgithubcitemplate.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -87,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         //inflate and create the map
         setContentView(R.layout.activity_main);
 
-        map = findViewById<MapView>(R.id.map)
+        map = findViewById<MapView>(R.id.locationMap)
         map.setTileSource(TileSourceFactory.MAPNIK);
         class OnMarkerDragListenerDrawer : OnMarkerDragListener {
             var mTrace: ArrayList<GeoPoint>
@@ -145,11 +146,11 @@ class MainActivity : AppCompatActivity() {
 //optionally, you can set the minimap to a different tile source
 //minimapOverlay.setTileSource(....);
         map.overlays.add(minimapOverlay);
-        val button = Button(this)
-        button.text = "Back"
-        button.setBackgroundColor(Color.GREEN)
-        button.setTextColor(Color.RED)
-        map.addView(button);
+        val button : Button = findViewById(R.id.button3)
+        button.setOnClickListener{
+            val intent = Intent(this, MainActivity_DD::class.java)
+            startActivity(intent)
+        }
 
 
 
@@ -175,11 +176,23 @@ class MainActivity : AppCompatActivity() {
             map.overlays.add(marker)
             map.invalidate()
             geoPoints.add(marker.position)
-            val roadManager: RoadManager = OSRMRoadManager(this@MainActivity, BuildConfig.APPLICATION_ID)
-            (roadManager as OSRMRoadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE)
-            val road = roadManager.getRoad(geoPoints)
-            val roadOverlay = RoadManager.buildRoadOverlay(road)
-            map.getOverlays().add(roadOverlay);
+        }
+        val roadManager: RoadManager = OSRMRoadManager(this@MainActivity, BuildConfig.APPLICATION_ID)
+        (roadManager as OSRMRoadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE)
+        val road = roadManager.getRoad(geoPoints)
+        val roadOverlay = RoadManager.buildRoadOverlay(road)
+        map.getOverlays().add(roadOverlay);
+
+        for(j in geoPoints){
+            val marker2 = Marker(map)
+            marker2.position = GeoPoint(j.latitude, j.longitude)
+            marker2.isDraggable = true
+            marker2.setOnMarkerDragListener(OnMarkerDragListenerDrawer())
+            marker2.icon = ContextCompat.getDrawable(this@MainActivity, R.drawable.maker_icon)
+            x+=1
+            marker2.title = "$x"
+            marker2.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
+            map.overlays.add(marker2)
 
         }
 

@@ -8,6 +8,14 @@
     <org.osmdroid.views.MapView
         android:id="@+id/locationMap"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="682dp">
+
+    </org.osmdroid.views.MapView>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="49dp"
+        android:text="@string/button" />
 
 </LinearLayout>
