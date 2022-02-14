@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">AndroidGithubCiTemplate</string>
+    <string name="app_name">AndroidGithubCiTemplate</string>
     <string name="main_menu" translatable="false">Главное меню</string>
     <string name="new_bottom" translatable="false">Новая заметка</string>
     <string name="roude" translatable="false">Маршрут</string>
@@ -7,13 +7,14 @@
     <string name="eat" translatable="false">Питание</string>
     <string name="review" translatable="false">Советы и отзывы</string>
     <string name="start" translatable="false">Начать</string>
-    <string name="todo" translatable="false">TODO</string>
-    <string name="home" translatable="false">HOME</string>
-    <string name="back" translatable="false">Back</string>
-    <string name="the_participants" translatable="false">Участники :</string>
-    <string name="your_hike" translatable="false">Вы в походе</string>
-    <string name="workload" translatable="false">Загруженность :</string>
-    <string name="rest" translatable="false">Отдых :</string>
+    <string name="todo">TODO</string>
+    <string name="home">HOME</string>
+    <string name="back">Back</string>
+    <string name="the_participants">Участники :</string>
+    <string name="your_hike">Вы в походе</string>
+    <string name="workload">Загруженность :</string>
+    <string name="rest">Отдых :</string>
+    <string name="enter_your_name">Введите свое имя</string>
     <string name="hike_on_card">Маршрут на карте</string>
     <string name="persons">Участники :</string>
     <string name="your_in_hike">Вы в походе</string>
@@ -22,11 +23,4 @@
     <string name="text_main_menu1">Пока что тут пусто</string>
     <string name="text_main_menu2">Начните новый поход, чтобы увидеть информацию о нем</string>
     <string name="new_person_2">Добавить участника</string>
-    <string name="select">Select</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="raboooootai">RABOOOOOTAI</string>
-    <string name="button">Button</string>
-    <string name="textview">TextView</string>
-
 </resources>
