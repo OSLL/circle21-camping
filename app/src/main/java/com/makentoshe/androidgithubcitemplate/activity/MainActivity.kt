@@ -146,12 +146,11 @@ class MainActivity : AppCompatActivity() {
 //optionally, you can set the minimap to a different tile source
 //minimapOverlay.setTileSource(....);
         map.overlays.add(minimapOverlay);
-        val button : Button = findViewById(R.id.button3)
+        val button : Button = findViewById(R.id.back)
         button.setOnClickListener{
             val intent = Intent(this, MainActivity_DD::class.java)
             startActivity(intent)
         }
-
 
 
         val marker = Marker(map)
@@ -169,8 +168,8 @@ class MainActivity : AppCompatActivity() {
         val datalist1 = DbManager.ReadDbData1()
         val datalist2 = DbManager.ReadDbData2()
         var x = 0
-        for(i in datalist1){
-            marker.position = GeoPoint(i.toDouble(), datalist2[x].toDouble())
+        for(v in datalist1){
+            marker.position = GeoPoint(v.toDouble(), datalist2[x].toDouble())
             x+=1
             marker.title = "$x"
             map.overlays.add(marker)
@@ -183,22 +182,29 @@ class MainActivity : AppCompatActivity() {
         val roadOverlay = RoadManager.buildRoadOverlay(road)
         map.getOverlays().add(roadOverlay);
 
+        var y = 0
+
         for(j in geoPoints){
             val marker2 = Marker(map)
             marker2.position = GeoPoint(j.latitude, j.longitude)
             marker2.isDraggable = true
             marker2.setOnMarkerDragListener(OnMarkerDragListenerDrawer())
             marker2.icon = ContextCompat.getDrawable(this@MainActivity, R.drawable.maker_icon)
-            x+=1
-            marker2.title = "$x"
+            y+=1
+            marker2.title = "$y"
             marker2.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
             map.overlays.add(marker2)
 
         }
+        Toast.makeText(
+            baseContext,
+            y.toString(),
+            Toast.LENGTH_LONG
+        ).show()
 
 
         val line = Polyline();
-        var i = 1
+        var i = y
         val mReceive: MapEventsReceiver = object : MapEventsReceiver {
             override fun singleTapConfirmedHelper(p: GeoPoint): Boolean {
                 Toast.makeText(
@@ -223,11 +229,12 @@ class MainActivity : AppCompatActivity() {
                 marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
                 map.overlays.add(marker)
                 geoPoints.add(marker.position)
-                val roadManager: RoadManager = OSRMRoadManager(this@MainActivity, BuildConfig.APPLICATION_ID)
-                (roadManager as OSRMRoadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE)
-                val road = roadManager.getRoad(geoPoints)
-                val roadOverlay = RoadManager.buildRoadOverlay(road)
-                map.getOverlays().add(roadOverlay);
+                val roadManager1: RoadManager = OSRMRoadManager(this@MainActivity, BuildConfig.APPLICATION_ID)
+                (roadManager1 as OSRMRoadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE)
+                val road1 = roadManager1.getRoad(geoPoints)
+                val roadOverlay1 = RoadManager.buildRoadOverlay(road1)
+                map.getOverlays().remove(roadOverlay)
+                map.getOverlays().add(roadOverlay1);
                 DbManager.openDb()
                 DbManager.insertToDb(i.toString(), p.latitude.toString(), p.longitude.toString())
 
@@ -246,8 +253,21 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         }
-        map.overlays.add(MapEventsOverlay(mReceive))
-        map.invalidate();
+        val button_delete: Button = findViewById(R.id.delete)
+        button_delete.setOnClickListener {
+            geoPoints.remove(geoPoints[y-1])
+            map.overlays.remove(marker)
+            val roadManager2: RoadManager = OSRMRoadManager(this@MainActivity, BuildConfig.APPLICATION_ID)
+            (roadManager2 as OSRMRoadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE)
+            val road2 = roadManager2.getRoad(geoPoints)
+            val roadOverlay1 = RoadManager.buildRoadOverlay(road2)
+            map.getOverlays().remove(roadOverlay1)
+            map.getOverlays().add(roadOverlay1);
+
+            map.overlays.add(MapEventsOverlay(mReceive))
+            map.invalidate();
+        }
+
         line.setOnClickListener { pl, mv, gp ->
             Toast.makeText(
                 map.context,
