@@ -5,10 +5,6 @@
     android:id="@+id/navigation"
     app:startDestination="@id/mainScreeen">
 
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.makentoshe.androidgithubcitemplate.activity.MapActivity"
-        android:label="MainActivity" />
     <navigation android:id="@+id/navigation4"
         app:startDestination="@id/mainScreeen">
         <activity
@@ -17,23 +13,44 @@
             android:label="activity_main_screen"
             tools:layout="@layout/activity_main_screen" />
         <action
-            android:id="@+id/action_global_mainActivity"
-            app:destination="@id/mainActivity"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_in_left"
-            app:popEnterAnim="@anim/slide_out_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
             android:id="@+id/action_global_mainActivity_DD"
-            app:destination="@id/mainActivity_DD"
+            app:destination="@id/navigation2"
             app:enterAnim="@anim/line_up"
             app:exitAnim="@anim/line_in_down"
             app:popEnterAnim="@anim/slide_out_left"
             app:popExitAnim="@anim/slide_out_right" />
     </navigation>
-    <activity
-        android:id="@+id/mainActivity_DD"
-        android:name="com.makentoshe.androidgithubcitemplate.activity.PreparationActivity"
-        android:label="activity_main_dd"
-        tools:layout="@layout/activity_main_dd" />
+    <fragment
+        android:id="@+id/editFragment"
+        android:name="com.makentoshe.androidgithubcitemplate.fragments.editFragment"
+        android:label="fragment_edit"
+        tools:layout="@layout/fragment_edit" >
+        <action
+            android:id="@+id/action_editFragment_to_navigation2"
+            app:destination="@id/navigation2" />
+    </fragment>
+    <navigation android:id="@+id/navigation2"
+        app:startDestination="@id/mainActivity_DD">
+        <activity
+            android:id="@+id/mainActivity_DD"
+            android:name="com.makentoshe.androidgithubcitemplate.activity.PreparationActivity"
+            android:label="activity_main_dd"
+            tools:layout="@layout/activity_main_dd" />
+        <action
+            android:id="@+id/action_global_editFragment"
+            app:destination="@id/editFragment" />
+        <action
+            android:id="@+id/action_global_mainActivity"
+            app:destination="@id/navigation3" />
+    </navigation>
+    <navigation android:id="@+id/navigation3"
+        app:startDestination="@id/mainActivity">
+        <activity
+            android:id="@+id/mainActivity"
+            android:name="com.makentoshe.androidgithubcitemplate.activity.MainActivity"
+            android:label="MainActivity" />
+        <action
+            android:id="@+id/action_global_navigation2"
+            app:destination="@id/navigation2" />
+    </navigation>
 </navigation>

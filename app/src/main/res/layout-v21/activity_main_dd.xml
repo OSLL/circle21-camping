@@ -1,107 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.PreparationActivity"
-    android:background="@color/grey">
-
+    android:background="@color/background"
+    tools:context=".activity.MainActivity_DD">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_id2"
         android:layout_width="match_parent"
         android:layout_height="307dp"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-1dp"
+        android:visibility="gone"
+        android:layout_marginLeft="-1dp"
+        android:layout_marginTop="243dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="181dp"
+        android:orientation="horizontal" />
+
+    <Button
+        android:id="@+id/addindBrhGoMap"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/ic_rectangle_1__3_"
+        android:text="@string/hike_on_card"
+        android:textSize="23sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addindBthAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="325dp"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="10dp"
-        android:text="Список участников: "
-        android:textColor="@android:color/white"
-        android:textSize="35sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="5dp" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="182dp"
+        android:text="@string/persons"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/white"
+        android:textSize="29sp"
+        android:textStyle="bold" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addindBrhGoMap"
-        android:layout_width="230dp"
-        android:layout_height="67dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="307dp"
-        android:elevation="10dp"
-        app:backgroundTint="#7F7979"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/recycler_view_id2"
-        app:layout_constraintVertical_bias="0.95"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:layout_marginLeft="15dp" />
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="275dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="68dp"
+        android:background="@drawable/ic_rectangle_1__3_" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addindBthAdd"
-        android:layout_width="65dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="15dp"
-        android:elevation="10dp"
-        android:src="@drawable/new_user"
-        app:backgroundTint="#7F7979"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view_id2"
-        app:layout_constraintVertical_bias="0.100000024"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addindBthEdit"
-        android:layout_width="65dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="15dp"
-        android:elevation="10dp"
-        android:src="@drawable/ic_noun_edit_user_1205843"
-        app:backgroundTint="#7F7979"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view_id2"
-        app:layout_constraintVertical_bias="0.38"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addindBthDelete"
-        android:layout_width="65dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="15dp"
-        android:elevation="10dp"
-        android:src="@drawable/delete_user"
-        app:backgroundTint="#7F7979"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view_id2"
-        app:layout_constraintVertical_bias="0.65999997"
-        tools:ignore="SpeakableTextPresentCheck" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/imageView2"
+        android:layout_alignEnd="@+id/imageView2"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="52dp"
+        android:text="@string/your_hike"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/white"
+        android:textSize="29sp"
+        android:textStyle="bold"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignRight="@+id/imageView2"
+        android:layout_marginLeft="53dp"
+        android:layout_marginRight="52dp" />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addingAddCheckBox"
-        android:layout_width="45dp"
-        android:layout_height="70dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
-        android:elevation="10dp"
-        android:src="@drawable/ic_add"
-        app:backgroundTint="#643BBD"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

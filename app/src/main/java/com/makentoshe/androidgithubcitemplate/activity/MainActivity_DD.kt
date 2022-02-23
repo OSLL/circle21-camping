@@ -9,12 +9,9 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
-import android.widget.FrameLayout
 import android.widget.ImageButton
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -30,7 +27,7 @@ class MainActivity_DD : AppCompatActivity() {
     private val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     private lateinit var adapter: LastPreparationAdapter
     private lateinit var newUser : FloatingActionButton
-    private lateinit var addindDthToRoadPlan: FloatingActionButton
+    private lateinit var addindDthToRoadPlan: Button
 
     @RequiresApi(Build.VERSION_CODES.HONEYCOMB)
     fun NoButton() {
@@ -50,8 +47,11 @@ class MainActivity_DD : AppCompatActivity() {
         userList = ArrayList()
         newUser = findViewById(R.id.addindBthAdd)
         recv = findViewById(R.id.recycler_view_id2)
+        recv.visibility = View.GONE
 
         newUser.setOnClickListener {
+            recv.visibility = View.VISIBLE
+            newUser.visibility = View.GONE
             val dialog = BottomSheetDialog(this)
             val view = layoutInflater.inflate(R.layout.bottom_sheet_layout,null)
             val close = view.findViewById<ImageButton>(R.id.close)
@@ -60,22 +60,20 @@ class MainActivity_DD : AppCompatActivity() {
                 dialog.dismiss()
                 NoActionBar()
             }
+
             btnAddPerson.setOnClickListener {
                 NoButton()
                 val inflter = LayoutInflater.from(this)
                 val v = inflter.inflate(R.layout.bottom_sheet_layout, null)
                 val userfirstName = v.findViewById<EditText>(R.id.EditTextfirstname)
                 val userlastName = v.findViewById<EditText>(R.id.editTextTextLastName)
-                val age = v.findViewById<EditText>(R.id.editTextTextAge)
                 recv.layoutManager = layoutManager
                 recv.setHasFixedSize(true)
                 recv.adapter = adapter
                 userList.add(
                     dataPerson(
-                        "Имя: ${userfirstName.text.toString()}",
-                        "Фамилия: ${userlastName.text.toString()} ",
-                        "Загруженность: ",
-                        "Возраст: ${age.text.toString()} "
+                        "Имя: ${userfirstName.text}",
+                        "Фамилия: ${userlastName.text} ",
                     )
                 )
                 adapter.notifyDataSetChanged()
