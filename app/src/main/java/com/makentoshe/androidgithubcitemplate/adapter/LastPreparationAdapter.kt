@@ -1,5 +1,6 @@
 package com.makentoshe.androidgithubcitemplate.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,10 +23,10 @@ class LastPreparationAdapter(private val userList: MutableList<dataPerson>) : Re
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.name.text = userList[position].toString()
-        holder.first_name.text = userList[position].toString()
+        Log.d("MyLog","NotBag: ${userList.size}")
+        holder.name.text = userList[position].name
+        holder.first_name.text = userList[position].first_name
     }
-
     override fun getItemCount(): Int {
         return userList.size
     }

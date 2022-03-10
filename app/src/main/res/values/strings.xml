@@ -24,4 +24,8 @@
     <string name="text_main_menu2">Начните новый поход</string>
     <string name="new_person_2">Добавить участника</string>
     <string name="delete">Delete</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
