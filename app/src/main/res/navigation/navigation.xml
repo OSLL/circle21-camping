@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/editFragment"
-        android:name="com.example.android.navigation.EditFragment"
+        android:name="EditFragment"
         android:label="fragment_edit"
         tools:layout="@layout/fragment_edit" >
         <argument
@@ -30,12 +30,12 @@
         app:startDestination="@id/mainActivity">
         <activity
             android:id="@+id/mainActivity"
-            android:name="com.example.android.navigation.MainActivity"
+            android:name="MainActivity"
             android:label="MainActivity" />
     </navigation>
     <fragment
         android:id="@+id/mainFragmentDD"
-        android:name="com.example.android.navigation.MainFragmentDD"
+        android:name="MainFragmentDD"
         android:label="fragment_main_d_d"
         tools:layout="@layout/fragment_main_d_d" >
         <action
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.example.android.navigation.StartFragment"
+        android:name="StartFragment"
         android:label="fragment_start"
         tools:layout="@layout/fragment_start" >
         <action

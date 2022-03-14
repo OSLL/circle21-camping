@@ -4,16 +4,21 @@ package com.makentoshe.androidgithubcitemplate.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.makentoshe.androidgithubcitemplate.R
+import com.makentoshe.androidgithubcitemplate.databinding.ActivityFirstMainActiviteBinding
 
 
 class MainActivity_DD : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_first_main_activite)
-        }
+        @Suppress("UNUSED_VARIABLE")
+        val binding = DataBindingUtil.setContentView<ActivityFirstMainActiviteBinding>(
+            this,
+            R.layout.activity_first_main_activite
+        )
     }
+}
 
 
 

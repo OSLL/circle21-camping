@@ -16,18 +16,13 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <LinearLayout
+            android:id="@+id/linearrr"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <fragment
+            <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/myNavHostFragment"
                 android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
@@ -36,7 +31,6 @@
                 app:defaultNavHost="true"
                 />
         </LinearLayout>
-    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
 
 

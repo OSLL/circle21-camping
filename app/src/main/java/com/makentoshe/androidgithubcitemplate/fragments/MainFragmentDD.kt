@@ -27,7 +27,7 @@ class MainFragmentDD : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val binding: MainFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_d_d, container, false)
+        val binding: FragmentMainDDBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_d_d, container, false)
         userList = ArrayList()
         newUser = binding.addindBthAdd
         recv = binding.recyclerViewId3
@@ -56,7 +56,7 @@ class MainFragmentDD : Fragment() {
         addindDthToRoadPlan = binding.addindBrhGoMap
         adapter = LastPreparationAdapter(userList)
         addindDthToRoadPlan.setOnClickListener {
-            view?.findNavController()?.navigate(com.example.android.navigation.MainFragmentDDDirections.actionMainFragmentDDToNavigation3())
+            view?.findNavController()?.navigate(MainFragmentDDDirections.actionMainFragmentDDToNavigation3())
         }
         return binding.root
 }
