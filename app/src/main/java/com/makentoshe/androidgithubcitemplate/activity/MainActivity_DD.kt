@@ -5,6 +5,7 @@ package com.makentoshe.androidgithubcitemplate.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.NavHostFragment
 import com.makentoshe.androidgithubcitemplate.R
 import com.makentoshe.androidgithubcitemplate.databinding.ActivityFirstMainActiviteBinding
 
@@ -17,6 +18,9 @@ class MainActivity_DD : AppCompatActivity() {
             this,
             R.layout.activity_first_main_activite
         )
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.myNavHostFragment) as NavHostFragment
+        val navController = navHostFragment.navController
     }
 }
 
