@@ -24,4 +24,5 @@
     <string name="text_main_menu2">Начните новый поход</string>
     <string name="new_person_2">Добавить участника</string>
     <string name="delete">Delete</string>
+    <string name="startpoint">Startpoint</string>
 </resources>

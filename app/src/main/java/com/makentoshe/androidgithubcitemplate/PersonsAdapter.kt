@@ -30,7 +30,7 @@ class PersonsAdapter(private val data: List<Person_d>) : RecyclerView.Adapter<Pe
     inner class ViewHolder
     internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvTitle : TextView
-            get() = itemView.name_id
+            get() = itemView.first_name_id
         val card: CardView
         get() = itemView.card
     }

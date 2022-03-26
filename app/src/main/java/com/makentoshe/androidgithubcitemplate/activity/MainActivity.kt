@@ -2,50 +2,39 @@ package com.makentoshe.androidgithubcitemplate.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
+import android.graphics.Color.WHITE
 import android.os.Build
 import android.os.Bundle
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
 import android.preference.PreferenceManager
 import android.util.DisplayMetrics
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.makentoshe.androidgithubcitemplate.R
+import com.makentoshe.androidgithubcitemplate.db.DbManager
+import org.osmdroid.bonuspack.routing.OSRMRoadManager
+import org.osmdroid.bonuspack.routing.Road
+import org.osmdroid.bonuspack.routing.RoadManager
 import org.osmdroid.config.Configuration
+import org.osmdroid.events.MapEventsReceiver
+import org.osmdroid.library.BuildConfig
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.*
+import org.osmdroid.views.overlay.Marker.OnMarkerDragListener
 import org.osmdroid.views.overlay.compass.CompassOverlay
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider
 import org.osmdroid.views.overlay.gestures.RotationGestureOverlay
+import org.osmdroid.views.overlay.gridlines.LatLonGridlineOverlay
 import org.osmdroid.views.overlay.gridlines.LatLonGridlineOverlay2
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
-import java.util.*
-import android.os.StrictMode
-import android.os.StrictMode.ThreadPolicy
-import android.widget.Button
-import android.widget.TextView
-import androidx.annotation.RequiresApi
-import androidx.constraintlayout.widget.ConstraintLayout
-import com.makentoshe.androidgithubcitemplate.db.DbManager
-import com.makentoshe.androidgithubcitemplate.db.My_db_helper
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
-import org.osmdroid.bonuspack.routing.OSRMRoadManager
-
-import org.osmdroid.bonuspack.routing.RoadManager
-import org.osmdroid.views.overlay.Polyline
-
-import org.osmdroid.views.overlay.Marker
-
-import org.osmdroid.views.overlay.Marker.OnMarkerDragListener
-import org.osmdroid.views.overlay.MapEventsOverlay
-
-import org.osmdroid.events.MapEventsReceiver
-import org.osmdroid.library.BuildConfig
 
 
 class MainActivity : AppCompatActivity() {
@@ -90,12 +79,21 @@ class MainActivity : AppCompatActivity() {
 
         map = findViewById<MapView>(R.id.locationMap)
         map.setTileSource(TileSourceFactory.MAPNIK);
+        val n = 59.9333
+        val m = 30.3
+        onCreate(n, m)
+
+
+    }
+
+     fun onCreate(n:Double, m:Double) {
         class OnMarkerDragListenerDrawer : OnMarkerDragListener {
             var mTrace: ArrayList<GeoPoint>
             var mPolyline: Polyline
             override fun onMarkerDrag(marker: Marker) {
                 //mTrace.add(marker.getPosition());
             }
+
             override fun onMarkerDragEnd(marker: Marker) {
                 mTrace.add(marker.position)
                 mPolyline.setPoints(mTrace)
@@ -117,44 +115,33 @@ class MainActivity : AppCompatActivity() {
         }
 
         val mapController = map.controller
+        DbManager.openDb()
+        val datalist1 = DbManager.ReadDbData1()
+        val datalist2 = DbManager.ReadDbData2()
         mapController.setZoom(10.5)
-        val startPoint = GeoPoint(59.9333, 30.3);
+        val startPoint = GeoPoint(n, m);
+         val geoPoints = ArrayList<GeoPoint>();
+         geoPoints.add(startPoint)
         map.maxZoomLevel = 20.0
         map.minZoomLevel = 5.0
-        mapController.setCenter(startPoint);
         val locationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(this), map);
         locationOverlay.enableMyLocation();
         map.overlays.add(locationOverlay)
         val overlay = LatLonGridlineOverlay2()
+        overlay.setBackgroundColor(1)
         map.overlays.add(overlay)
         val rotationGestureOverlay = RotationGestureOverlay(this, map);
         rotationGestureOverlay.isEnabled
         map.setMultiTouchControls(true);
         map.overlays.add(rotationGestureOverlay);
-        val compassOverlay = CompassOverlay(this, InternalCompassOrientationProvider(this), map)
-        compassOverlay.enableCompass()
-        map.overlays.add(compassOverlay)
-        val dm: DisplayMetrics = this.resources.displayMetrics
-        val scaleBarOverlay = ScaleBarOverlay(map)
-        scaleBarOverlay.setCentred(true)
-//play around with these values to get the location on screen in the right place for your application
-        scaleBarOverlay.setScaleBarOffset(dm.widthPixels / 2, 10);
-        map.overlays.add(scaleBarOverlay);
-        val minimapOverlay = MinimapOverlay(this, map.tileRequestCompleteHandler);
-        minimapOverlay.setWidth(dm.widthPixels / 5);
-        minimapOverlay.setHeight(dm.heightPixels / 5);
-//optionally, you can set the minimap to a different tile source
-//minimapOverlay.setTileSource(....);
-        map.overlays.add(minimapOverlay);
-        val button : Button = findViewById(R.id.back)
-        button.setOnClickListener{
+        val button: Button = findViewById(R.id.back)
+        button.setOnClickListener {
             val intent = Intent(this, MainActivity_DD::class.java)
             startActivity(intent)
         }
 
-
         val marker = Marker(map)
-        marker.position = GeoPoint(59.9333, 30.3)
+        marker.position = GeoPoint(n, m)
         marker.setDraggable(true)
         marker.setOnMarkerDragListener(OnMarkerDragListenerDrawer())
         marker.icon = ContextCompat.getDrawable(this, R.drawable.maker_icon)
@@ -162,49 +149,59 @@ class MainActivity : AppCompatActivity() {
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
         map.overlays.add(marker)
         map.invalidate()
-        var geoPoints = ArrayList<GeoPoint>();
-        geoPoints.add(startPoint)
-        DbManager.openDb()
-        val datalist1 = DbManager.ReadDbData1()
-        val datalist2 = DbManager.ReadDbData2()
         var x = 0
-        for(v in datalist1){
+        for (v in datalist1) {
             marker.position = GeoPoint(v.toDouble(), datalist2[x].toDouble())
-            x+=1
+            x += 1
             marker.title = "$x"
             map.overlays.add(marker)
             map.invalidate()
             geoPoints.add(marker.position)
         }
-        val roadManager: RoadManager = OSRMRoadManager(this@MainActivity, BuildConfig.APPLICATION_ID)
-        (roadManager as OSRMRoadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE)
-        val road = roadManager.getRoad(geoPoints)
-        val roadOverlay = RoadManager.buildRoadOverlay(road)
-        map.getOverlays().add(roadOverlay);
+
 
         var y = 0
 
-        for(j in geoPoints){
+        for (j in geoPoints) {
             val marker2 = Marker(map)
             marker2.position = GeoPoint(j.latitude, j.longitude)
             marker2.isDraggable = true
             marker2.setOnMarkerDragListener(OnMarkerDragListenerDrawer())
             marker2.icon = ContextCompat.getDrawable(this@MainActivity, R.drawable.maker_icon)
-            y+=1
+            y += 1
             marker2.title = "$y"
             marker2.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
             map.overlays.add(marker2)
 
         }
-        Toast.makeText(
-            baseContext,
-            y.toString(),
-            Toast.LENGTH_LONG
-        ).show()
+        val roadManager: RoadManager =
+            OSRMRoadManager(this@MainActivity, BuildConfig.APPLICATION_ID)
+        (roadManager as OSRMRoadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE)
+        val road = roadManager.getRoad(geoPoints)
+        val roadOverlay = RoadManager.buildRoadOverlay(road)
+        map.overlays.add(roadOverlay);
+
+         mapController.setCenter(GeoPoint(geoPoints[geoPoints.lastIndex].latitude, geoPoints[geoPoints.lastIndex].longitude) )
 
 
         val line = Polyline();
         var i = y
+        val buttondelete: Button = findViewById(R.id.delete)
+        buttondelete.setOnClickListener {
+            map.overlays.remove(map.overlays.findLast { it -> it is Marker })
+            Toast.makeText(
+                baseContext,
+                geoPoints.lastIndex.toString(),
+                Toast.LENGTH_LONG
+            ).show()
+            map.invalidate()
+            DbManager.removeFromDb((geoPoints.lastIndex).toString())
+            geoPoints.remove(geoPoints[geoPoints.lastIndex])
+            map.overlays.clear()
+            onCreate(n, m)
+        }
+
+
         val mReceive: MapEventsReceiver = object : MapEventsReceiver {
             override fun singleTapConfirmedHelper(p: GeoPoint): Boolean {
                 Toast.makeText(
@@ -213,12 +210,15 @@ class MainActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG
                 ).show()
                 val marker2 = Marker(map)
-                marker2.position = GeoPoint(geoPoints[i-1].latitude, geoPoints[i-1].longitude)
+                marker2.position = GeoPoint(
+                    geoPoints[geoPoints.lastIndex].latitude,
+                    geoPoints[geoPoints.lastIndex].longitude
+                )
                 marker2.isDraggable = true
                 marker2.setOnMarkerDragListener(OnMarkerDragListenerDrawer())
                 marker2.icon = ContextCompat.getDrawable(this@MainActivity, R.drawable.maker_icon)
                 marker2.title = "$i"
-                i=i+1
+                i += 1
                 marker2.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
                 map.overlays.add(marker2)
                 marker.position = GeoPoint(p.latitude, p.longitude)
@@ -226,26 +226,20 @@ class MainActivity : AppCompatActivity() {
                 marker.setOnMarkerDragListener(OnMarkerDragListenerDrawer())
                 marker.icon = ContextCompat.getDrawable(this@MainActivity, R.drawable.maker_icon)
                 marker.title = "$i"
+                marker.id = "del"
                 marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
                 map.overlays.add(marker)
                 geoPoints.add(marker.position)
-                val roadManager1: RoadManager = OSRMRoadManager(this@MainActivity, BuildConfig.APPLICATION_ID)
+                val roadManager1: RoadManager =
+                    OSRMRoadManager(this@MainActivity, BuildConfig.APPLICATION_ID)
                 (roadManager1 as OSRMRoadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE)
                 val road1 = roadManager1.getRoad(geoPoints)
                 val roadOverlay1 = RoadManager.buildRoadOverlay(road1)
-                map.getOverlays().remove(roadOverlay)
-                map.getOverlays().add(roadOverlay1);
+                map.overlays.add(roadOverlay1);
                 DbManager.openDb()
                 DbManager.insertToDb(i.toString(), p.latitude.toString(), p.longitude.toString())
-
-
-
-
-
-
-
-
-
+                map.overlays.clear()
+                onCreate(n, m)
                 return false
             }
 
@@ -253,20 +247,17 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         }
-        val button_delete: Button = findViewById(R.id.delete)
-        button_delete.setOnClickListener {
-            geoPoints.remove(geoPoints[y-1])
-            map.overlays.remove(marker)
-            val roadManager2: RoadManager = OSRMRoadManager(this@MainActivity, BuildConfig.APPLICATION_ID)
-            (roadManager2 as OSRMRoadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE)
-            val road2 = roadManager2.getRoad(geoPoints)
-            val roadOverlay1 = RoadManager.buildRoadOverlay(road2)
-            map.getOverlays().remove(roadOverlay1)
-            map.getOverlays().add(roadOverlay1);
 
-            map.overlays.add(MapEventsOverlay(mReceive))
-            map.invalidate();
-        }
+
+        map.overlays.add(MapEventsOverlay(mReceive))
+        map.invalidate();
+
+         val strt:Button = findViewById(R.id.startpoint)
+         strt.setOnClickListener {
+             map.overlays.clear()
+             onCreate(geoPoints[1].latitude, geoPoints[1].longitude)
+         }
+        //
 
         line.setOnClickListener { pl, mv, gp ->
             Toast.makeText(
@@ -280,6 +271,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
 
 
     override fun onResume() {

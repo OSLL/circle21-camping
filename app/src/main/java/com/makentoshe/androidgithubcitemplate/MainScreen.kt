@@ -9,6 +9,7 @@ import android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.makentoshe.androidgithubcitemplate.activity.MainActivity_DD
 import kotlinx.android.synthetic.main.activity_main_screen.*
 
 class MainScreen : AppCompatActivity(), View.OnClickListener {
@@ -38,7 +39,7 @@ class MainScreen : AppCompatActivity(), View.OnClickListener {
 
     val button_menu : Button = findViewById(R.id.button2)
     button_menu.setOnClickListener{
-        val intent = Intent(this,MainActivity_DD::class.java)
+        val intent = Intent(this, MainActivity_DD::class.java)
         startActivity(intent)
     }
 

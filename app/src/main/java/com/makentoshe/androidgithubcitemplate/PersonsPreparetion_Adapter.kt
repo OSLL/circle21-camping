@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_first_main_activite.view.*
 import kotlinx.android.synthetic.main.activity_preparation_person.view.*
 
 class PersonsPreparetion_Adapter (private val data: List<Person_d>) : RecyclerView.Adapter<PersonsPreparetion_Adapter.ViewHolder>() {
