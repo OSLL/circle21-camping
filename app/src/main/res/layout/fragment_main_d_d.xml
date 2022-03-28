@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/fullscreenBackgroundColor"
@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_id3"
             android:layout_width="match_parent"
@@ -43,15 +44,6 @@
             android:textSize="23sp"
             android:textStyle="bold" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addindBthAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="325dp"
-            tools:ignore="SpeakableTextPresentCheck" />
-
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
@@ -71,7 +63,28 @@
         <RelativeLayout
             android:id="@+id/editFragment_from_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp">
+
+
+            <ImageButton
+                android:id="@+id/addindBthAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="209dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="122dp"
+                android:layout_marginLeft="149dp"
+                android:layout_marginEnd="145dp"
+                android:layout_marginBottom="246dp"
+                android:background="@drawable/ic_new_personsvg" />
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/imageView2"
@@ -80,26 +93,27 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="68dp"
-            android:background="@drawable/ic_rectangle_1__3_" />
+            android:background="@drawable/ic_rectangle_1__3_"
+            android:shadowColor="@color/red" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/imageView2"
+            android:layout_alignLeft="@+id/imageView2"
             android:layout_alignEnd="@+id/imageView2"
+            android:layout_alignRight="@+id/imageView2"
             android:layout_alignParentTop="true"
             android:layout_marginStart="53dp"
+            android:layout_marginLeft="53dp"
             android:layout_marginTop="76dp"
             android:layout_marginEnd="52dp"
+            android:layout_marginRight="52dp"
             android:text="@string/your_hike"
             android:textColor="@color/white"
             android:textColorHighlight="@color/white"
             android:textSize="29sp"
-            android:textStyle="bold"
-            android:layout_alignLeft="@+id/imageView2"
-            android:layout_alignRight="@+id/imageView2"
-            android:layout_marginLeft="53dp"
-            android:layout_marginRight="52dp" />
+            android:textStyle="bold" />
     </RelativeLayout>
 
 </FrameLayout>
