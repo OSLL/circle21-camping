@@ -166,14 +166,6 @@ class MainActivity : AppCompatActivity() {
          geoPoints.add(startPoint)
         map.maxZoomLevel = 20.0
         map.minZoomLevel = 5.0
-        val locationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(this), map);
-        locationOverlay.enableMyLocation()
-         val bitmap = Bitmap.createBitmap(
-             100, 100,
-             Bitmap.Config.ARGB_8888
-         )
-         locationOverlay.setPersonIcon(bitmap)
-        map.overlays.add(locationOverlay)
         val overlay = LatLonGridlineOverlay2()
         overlay.setBackgroundColor(0)
         map.overlays.add(overlay)
@@ -237,11 +229,6 @@ class MainActivity : AppCompatActivity() {
         val buttondelete: Button = findViewById(R.id.delete)
         buttondelete.setOnClickListener {
             map.overlays.remove(map.overlays.findLast { it -> it is Marker })
-            Toast.makeText(
-                baseContext,
-                geoPoints.lastIndex.toString(),
-                Toast.LENGTH_LONG
-            ).show()
             map.invalidate()
             DbManager.removeFromDb((geoPoints.lastIndex).toString())
             geoPoints.remove(geoPoints[geoPoints.lastIndex])
@@ -325,6 +312,7 @@ class MainActivity : AppCompatActivity() {
                  DbManager.removeFromDb((geoPoints.lastIndex).toString())
                  geoPoints.remove(geoPoints[geoPoints.lastIndex])
              }
+             DbManager.insertToDb(0.toString(), n.toString(), m.toString())
              val z = map.zoomLevelDouble
              onCreate(n, m, z)
          }
