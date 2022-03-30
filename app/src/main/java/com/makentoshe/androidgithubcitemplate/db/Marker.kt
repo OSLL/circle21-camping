@@ -9,7 +9,7 @@ object Marker:BaseColumns {
 
 
     const val DATABASE_VERSION = 1
-    const val DATABASE_NAME = "Markerr.db"
+    const val DATABASE_NAME = "Marker.db"
 
 
     const val CREATE_TABLE = "CREATE TABLE IF NOT EXISTS $TABLE_NAME (" +

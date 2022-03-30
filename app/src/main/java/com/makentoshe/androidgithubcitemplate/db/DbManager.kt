@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import android.provider.BaseColumns
 
 class DbManager( context: Context) {
     val myDbHelper = My_db_helper(context)
@@ -53,5 +54,10 @@ class DbManager( context: Context) {
 
         return datalist2
     }
+    fun removeFromDb(id: String){
+        val selec = BaseColumns._ID + "=$id"
+        db?.delete(Marker.TABLE_NAME, selec, null)
+    }
+
 
 }
