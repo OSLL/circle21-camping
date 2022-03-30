@@ -10,17 +10,27 @@
         android:name="com.makentoshe.androidgithubcitemplate.fragments.EditFragment"
         android:label="fragment_edit"
         tools:layout="@layout/fragment_edit" >
+
         <action
             android:id="@+id/action_editFragment_to_mainFragmentDD"
             app:destination="@id/mainFragmentDD"
-            app:enterAnim="@anim/slide_out_left" >
-        <argument
-            android:name="name_args"
-            app:argType="string" />
-        <argument
-            android:name="last_name_args"
-            app:argType="string" />
+            app:enterAnim="@anim/slide_out_left">
+            <argument
+                android:name="firstNameBundle"
+                app:argType="string" />
+            <argument
+                android:name="LastNameBundle"
+                app:argType="string" />
+            <argument
+                android:name="Age"
+                app:argType="string" />
+            <argument
+                android:name="WorkLoad"
+                app:argType="integer[]" />
     </action>
+        <action
+            android:id="@+id/action_editFragment_to_workLoadFragment"
+            app:destination="@id/workLoadFragment" />
     </fragment>
     <navigation android:id="@+id/navigation3"
         app:startDestination="@id/mainActivity">
@@ -37,7 +47,8 @@
         <action
             android:id="@+id/action_mainFragmentDD_to_editFragment"
             app:destination="@id/editFragment"
-            app:enterAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/slide_out_left">
+        </action>
         <action
             android:id="@+id/action_mainFragmentDD_to_navigation3"
             app:destination="@id/navigation3"
@@ -52,5 +63,18 @@
             android:id="@+id/action_startFragment_to_mainFragmentDD"
             app:destination="@id/mainFragmentDD"
             app:enterAnim="@anim/slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/workLoadFragment"
+        android:name="com.makentoshe.androidgithubcitemplate.fragments.WorkLoadFragment"
+        android:label="WorkLoadFragment" >
+        <action
+            android:id="@+id/action_workLoadFragment_to_editFragment"
+            app:destination="@id/editFragment">
+            <argument
+                android:name="WorkLoadBundle"
+                app:argType="integer[]" />
+    </action>
+
     </fragment>
 </navigation>

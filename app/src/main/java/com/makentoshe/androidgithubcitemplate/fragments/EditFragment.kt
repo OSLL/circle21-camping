@@ -1,6 +1,5 @@
 package com.makentoshe.androidgithubcitemplate.fragments
 
-import EditFragmentDirections
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +16,13 @@ import com.makentoshe.androidgithubcitemplate.databinding.FragmentEditBinding
 
 class EditFragment : Fragment() {
 
+    private lateinit var firstName: EditText
+    private lateinit var lastName: EditText
+    private lateinit var textWorkload : TextView
+    private lateinit var btnAddUser: Button
+    private lateinit var btnBack: Button
+    private lateinit var age: EditText
+    private lateinit var textToWorkLoad: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,32 +30,39 @@ class EditFragment : Fragment() {
     ): View {
         val binding: FragmentEditBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_edit, container, false)
-        val firstName: EditText = binding.editName
-        val lastName : EditText = binding.editLastName
-        val age : EditText = binding.editAge
-        val btnBack : Button = binding.btnBack
-        val textWorkload : TextView = binding.textWorkload
-        val btnAddUser : Button = binding.btnAdd
+        firstName = binding.editName
+        lastName = binding.editLastName
+        btnBack = binding.btnBack
+        age = binding.editAge
+        textWorkload = binding.textWorkload
+        btnAddUser = binding.btnAdd
+        textToWorkLoad = binding.textWorkload
+        val getArrayInt = arguments?.getIntArray("WorkLoadBundle")
 
 
         val bundle = Bundle()
-
         btnAddUser.setOnClickListener {
             if (!firstName.text.isNullOrEmpty() && !lastName.text.isNullOrEmpty() && !age.text.isNullOrEmpty()) {
-                val name1 = firstName.text
-                val name2 = lastName.text
-                val age1 = age.text
-                bundle.putString("FirstName", name1.toString())
-                bundle.putString("LastName", name2.toString())
-                bundle.putString("Age", age1.toString())
-                findNavController().navigate(EditFragmentDirections.actionEditFragmentToMainFragmentDD())
+                val name1 = firstName.text.toString()
+                val name2 = lastName.text.toString()
+                val age = age.text.toString()
+                bundle.putString("firstNameBundle",name1)
+                bundle.putString("LastNameBundle", name2)
+                bundle.putString("Age",age)
+                bundle.putIntArray("WorkLoad", getArrayInt)
+                findNavController().navigate(R.id.action_editFragment_to_mainFragmentDD, bundle)
             }
         }
-        btnBack.setOnClickListener {
-
+        textToWorkLoad.setOnClickListener {
+            findNavController().navigate(R.id.action_editFragment_to_workLoadFragment)
         }
+
+//        btnBack.setOnClickListener {
+//            findNavController().navigate(EditFragmentDirections.actionEditFragmentToMainFragmentDD())
+//        }
         return binding.root
     }
+
 
 
 

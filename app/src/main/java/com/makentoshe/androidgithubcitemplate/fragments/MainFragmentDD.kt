@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.makentoshe.androidgithubcitemplate.R
@@ -20,25 +20,37 @@ import com.makentoshe.androidgithubcitemplate.databinding.FragmentMainDDBinding
 
 
 class MainFragmentDD : Fragment() {
-    private lateinit var recv: RecyclerView
-    private lateinit var userList: ArrayList<dataPerson>
+    lateinit var recv: RecyclerView
+    lateinit var userList: ArrayList<dataPerson>
     private val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-    private lateinit var adapter: LastPreparationAdapter
-    private lateinit var newUser : ImageButton
-    private lateinit var addindDthToRoadPlan: Button
-    private val args: MainFragmentDDArgs by navArgs()
+    lateinit var adapter: LastPreparationAdapter
+    lateinit var newUser : Button
+    lateinit var addindDthToRoadPlan: Button
+    private lateinit var yourHike: TextView
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val binding: FragmentMainDDBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_d_d, container, false)
-        val amountFirstName = args.nameArgs
-        val amountLastName = args.lastNameArgs
-        if (amountFirstName.isNotEmpty() && amountLastName.isNotEmpty()) {
-            createRecyclerItem(amountFirstName,amountLastName)
-        }
         userList = ArrayList()
         newUser = binding.addindBthAdd
         recv = binding.recyclerViewId3
-        recv.visibility = View.GONE
+        addindDthToRoadPlan = binding.addindBrhGoMap
+        adapter = LastPreparationAdapter(userList)
+        recv.adapter = adapter
+        recv.layoutManager = layoutManager
+        yourHike = binding.textYourHike
+
+
+        val firstNameFrag = arguments?.getString("firstNameBundle")
+        val lastNameFrag = arguments?.getString("LastNameBundle")
+        val ageFrag = arguments?.getString("Age")
+        val getIntArrayList = arguments?.getIntArray("WorkLoad")
+        val workLoad = getIntArrayList?.sum().toString()
+
+        if (!firstNameFrag.isNullOrEmpty() && !lastNameFrag.isNullOrEmpty() && !ageFrag.isNullOrEmpty()) {
+            yourHike.text = "Вы в походе"
+            createRecyclerItem(firstNameFrag,lastNameFrag, ageFrag, workLoad)
+        }
         newUser.setOnClickListener {
             view?.findNavController()?.navigate(MainFragmentDDDirections.actionMainFragmentDDToEditFragment())
         }
@@ -46,26 +58,26 @@ class MainFragmentDD : Fragment() {
         addindDthToRoadPlan.setOnClickListener {
             view?.findNavController()?.navigate(MainFragmentDDDirections.actionMainFragmentDDToNavigation3())
         }
-
-
         return binding.root
 }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun createRecyclerItem(amountFirst: String, amountLast: String) {
+    fun createRecyclerItem(firstNameFrag: String, lastNameFrag: String, age: String, workLoad: String) {
         recv.visibility = View.VISIBLE
-        newUser.visibility = View.GONE
-        recv.layoutManager = layoutManager
         recv.setHasFixedSize(true)
-        recv.adapter = adapter
-        adapter = LastPreparationAdapter(userList)
         userList.add(
             dataPerson(
-                "Имя: $amountFirst",
-                "Фамилия: $amountLast ",
+                firstNameFrag,
+                lastNameFrag,
+                "$age лет",
+                "$workLoad кг"
             )
         )
         adapter.notifyDataSetChanged()
     }
+
+
+
+
 
 }

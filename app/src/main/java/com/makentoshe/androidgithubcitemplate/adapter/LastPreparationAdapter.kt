@@ -14,6 +14,8 @@ class LastPreparationAdapter(private val userList: MutableList<dataPerson>) : Re
     inner class UserViewHolder(v: View) : RecyclerView.ViewHolder(v){
         val name: TextView = v.findViewById(R.id.second_name_id)
         val first_name: TextView = v.findViewById(R.id.first_name_id)
+        val age: TextView = v.findViewById(R.id.age_id)
+        val workLoad: TextView = v.findViewById(R.id.work_load)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -26,6 +28,8 @@ class LastPreparationAdapter(private val userList: MutableList<dataPerson>) : Re
         Log.d("MyLog","NotBag: ${userList.size}")
         holder.name.text = userList[position].name
         holder.first_name.text = userList[position].first_name
+        holder.age.text = userList[position].age
+        holder.workLoad.text = userList[position].workload
     }
     override fun getItemCount(): Int {
         return userList.size
