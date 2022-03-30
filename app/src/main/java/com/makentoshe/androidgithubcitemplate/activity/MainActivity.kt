@@ -1,14 +1,16 @@
 package com.makentoshe.androidgithubcitemplate.activity
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
-import android.graphics.Color.WHITE
+import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
 import android.preference.PreferenceManager
 import android.util.DisplayMetrics
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -18,7 +20,6 @@ import androidx.core.content.ContextCompat
 import com.makentoshe.androidgithubcitemplate.R
 import com.makentoshe.androidgithubcitemplate.db.DbManager
 import org.osmdroid.bonuspack.routing.OSRMRoadManager
-import org.osmdroid.bonuspack.routing.Road
 import org.osmdroid.bonuspack.routing.RoadManager
 import org.osmdroid.config.Configuration
 import org.osmdroid.events.MapEventsReceiver
@@ -26,12 +27,14 @@ import org.osmdroid.library.BuildConfig
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
-import org.osmdroid.views.overlay.*
+import org.osmdroid.views.overlay.MapEventsOverlay
+import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Marker.OnMarkerDragListener
+import org.osmdroid.views.overlay.Polyline
+import org.osmdroid.views.overlay.ScaleBarOverlay
 import org.osmdroid.views.overlay.compass.CompassOverlay
-import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider
+import org.osmdroid.views.overlay.compass.IOrientationProvider
 import org.osmdroid.views.overlay.gestures.RotationGestureOverlay
-import org.osmdroid.views.overlay.gridlines.LatLonGridlineOverlay
 import org.osmdroid.views.overlay.gridlines.LatLonGridlineOverlay2
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
@@ -40,6 +43,7 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 class MainActivity : AppCompatActivity() {
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 1;
     val DbManager = DbManager(this)
+
 
 
     private lateinit var map: MapView;
@@ -79,19 +83,29 @@ class MainActivity : AppCompatActivity() {
 
         map = findViewById<MapView>(R.id.locationMap)
         map.setTileSource(TileSourceFactory.MAPNIK);
-        val n = 59.9333
-        val m = 30.3
-        onCreate(n, m)
+        var n = 59.9333
+        var m = 30.3
+        val z = 10.5
+        DbManager.openDb()
+        val datalist1 = DbManager.ReadDbData1()
+        val datalist2 = DbManager.ReadDbData2()
+        if(datalist1.size != 0){
+            n = datalist1[0].toDouble()
+            m = datalist2[0].toDouble()
+        }
+
+
+        onCreate(n, m, z)
 
 
     }
 
-     fun onCreate(n:Double, m:Double) {
+     fun onCreate(n:Double, m:Double, z:Double) {
         class OnMarkerDragListenerDrawer : OnMarkerDragListener {
             var mTrace: ArrayList<GeoPoint>
             var mPolyline: Polyline
             override fun onMarkerDrag(marker: Marker) {
-                //mTrace.add(marker.getPosition());
+               //mTrace.add(marker.getPosition());
             }
 
             override fun onMarkerDragEnd(marker: Marker) {
@@ -113,22 +127,55 @@ class MainActivity : AppCompatActivity() {
                 map.overlays.add(mPolyline)
             }
         }
+         var t = map.mapOrientation
 
         val mapController = map.controller
+         val dm: DisplayMetrics = this.resources.displayMetrics
+         class MyCompassOverlay : CompassOverlay {
+
+             constructor(context: Context?, mapView: MapView) : super(context, mapView)
+
+             constructor(context: Context?, iOrientationProvider: IOrientationProvider, mapView: MapView) : super(
+                 context,
+                 iOrientationProvider,
+                 mapView
+             )
+
+             override fun onLongPress(e: MotionEvent?, mapView: MapView?): Boolean {
+                 map.mapOrientation = 0f
+                 return super.onLongPress(e, map)
+             }
+
+         }
+         val compass = MyCompassOverlay(this, map)
+         compass.enableCompass()
+         compass.setCompassCenter(100F,dm.heightPixels.toFloat()/2.6F)
+
+         map.overlays.add(compass)
+
+         val scaleBarOverlay = ScaleBarOverlay(map)
+         scaleBarOverlay.setAlignBottom(true)
+         scaleBarOverlay.setScaleBarOffset(dm.widthPixels / 2, 10);
+         map.overlays.add(scaleBarOverlay);
         DbManager.openDb()
         val datalist1 = DbManager.ReadDbData1()
         val datalist2 = DbManager.ReadDbData2()
-        mapController.setZoom(10.5)
+        mapController.setZoom(z)
         val startPoint = GeoPoint(n, m);
          val geoPoints = ArrayList<GeoPoint>();
          geoPoints.add(startPoint)
         map.maxZoomLevel = 20.0
         map.minZoomLevel = 5.0
         val locationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(this), map);
-        locationOverlay.enableMyLocation();
+        locationOverlay.enableMyLocation()
+         val bitmap = Bitmap.createBitmap(
+             100, 100,
+             Bitmap.Config.ARGB_8888
+         )
+         locationOverlay.setPersonIcon(bitmap)
         map.overlays.add(locationOverlay)
         val overlay = LatLonGridlineOverlay2()
-        overlay.setBackgroundColor(1)
+        overlay.setBackgroundColor(0)
         map.overlays.add(overlay)
         val rotationGestureOverlay = RotationGestureOverlay(this, map);
         rotationGestureOverlay.isEnabled
@@ -145,7 +192,8 @@ class MainActivity : AppCompatActivity() {
         marker.setDraggable(true)
         marker.setOnMarkerDragListener(OnMarkerDragListenerDrawer())
         marker.icon = ContextCompat.getDrawable(this, R.drawable.maker_icon)
-        marker.title = "Test Marker"
+
+        marker.title = "1"
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
         map.overlays.add(marker)
         map.invalidate()
@@ -159,7 +207,12 @@ class MainActivity : AppCompatActivity() {
             geoPoints.add(marker.position)
         }
 
-
+         val roadManager: RoadManager =
+             OSRMRoadManager(this@MainActivity, BuildConfig.APPLICATION_ID)
+         (roadManager as OSRMRoadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE)
+         val road = roadManager.getRoad(geoPoints)
+         val roadOverlay = RoadManager.buildRoadOverlay(road)
+         map.overlays.add(roadOverlay);
         var y = 0
 
         for (j in geoPoints) {
@@ -174,12 +227,7 @@ class MainActivity : AppCompatActivity() {
             map.overlays.add(marker2)
 
         }
-        val roadManager: RoadManager =
-            OSRMRoadManager(this@MainActivity, BuildConfig.APPLICATION_ID)
-        (roadManager as OSRMRoadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE)
-        val road = roadManager.getRoad(geoPoints)
-        val roadOverlay = RoadManager.buildRoadOverlay(road)
-        map.overlays.add(roadOverlay);
+
 
          mapController.setCenter(GeoPoint(geoPoints[geoPoints.lastIndex].latitude, geoPoints[geoPoints.lastIndex].longitude) )
 
@@ -198,11 +246,13 @@ class MainActivity : AppCompatActivity() {
             DbManager.removeFromDb((geoPoints.lastIndex).toString())
             geoPoints.remove(geoPoints[geoPoints.lastIndex])
             map.overlays.clear()
-            onCreate(n, m)
+            val z = map.zoomLevelDouble
+            onCreate(n, m, z)
         }
 
 
-        val mReceive: MapEventsReceiver = object : MapEventsReceiver {
+
+         val mReceive: MapEventsReceiver = object : MapEventsReceiver {
             override fun singleTapConfirmedHelper(p: GeoPoint): Boolean {
                 Toast.makeText(
                     baseContext,
@@ -239,7 +289,8 @@ class MainActivity : AppCompatActivity() {
                 DbManager.openDb()
                 DbManager.insertToDb(i.toString(), p.latitude.toString(), p.longitude.toString())
                 map.overlays.clear()
-                onCreate(n, m)
+                val z = map.zoomLevelDouble
+                onCreate(n, m, z)
                 return false
             }
 
@@ -255,7 +306,27 @@ class MainActivity : AppCompatActivity() {
          val strt:Button = findViewById(R.id.startpoint)
          strt.setOnClickListener {
              map.overlays.clear()
-             onCreate(geoPoints[1].latitude, geoPoints[1].longitude)
+             val n = geoPoints[geoPoints.lastIndex].latitude
+             val m = geoPoints[geoPoints.lastIndex].longitude
+             for (i  in 0..geoPoints.lastIndex){
+                 DbManager.removeFromDb((geoPoints.lastIndex).toString())
+                 geoPoints.remove(geoPoints[geoPoints.lastIndex])
+         }
+             DbManager.insertToDb(0.toString(), n.toString(), m.toString())
+             val z = map.zoomLevelDouble
+             onCreate(n, m, z)
+         }
+         val clear: Button = findViewById(R.id.clear)
+         clear.setOnClickListener {
+             map.overlays.clear()
+             val n = geoPoints[0].latitude
+             val m = geoPoints[0].longitude
+             for (i  in 0..geoPoints.lastIndex){
+                 DbManager.removeFromDb((geoPoints.lastIndex).toString())
+                 geoPoints.remove(geoPoints[geoPoints.lastIndex])
+             }
+             val z = map.zoomLevelDouble
+             onCreate(n, m, z)
          }
         //
 
