@@ -16,7 +16,7 @@
         android:id="@+id/clear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Очистить"
+        android:text="@string/clear"
         app:layout_constraintStart_toEndOf="@id/delete"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,15 +32,24 @@
         android:id="@+id/startpoint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Начальная точка"
+        android:text="@string/startpoint"
         app:layout_constraintTop_toBottomOf="@id/delete"
         app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/compare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="compare"
+        app:layout_constraintStart_toEndOf="@id/startpoint"
+        app:layout_constraintTop_toBottomOf="@id/clear" />
 
     <org.osmdroid.views.MapView
         android:id="@+id/locationMap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
 
     </org.osmdroid.views.MapView>
 

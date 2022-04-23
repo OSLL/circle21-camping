@@ -38,6 +38,9 @@
             android:id="@+id/mainActivity"
             android:name="com.makentoshe.androidgithubcitemplate.activity.MainActivity"
             android:label="MainActivity" />
+        <action
+            android:id="@+id/action_global_mainFragmentDD"
+            app:destination="@id/mainFragmentDD" />
     </navigation>
     <fragment
         android:id="@+id/mainFragmentDD"

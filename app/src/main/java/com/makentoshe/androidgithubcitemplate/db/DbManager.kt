@@ -5,8 +5,10 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
+import com.makentoshe.androidgithubcitemplate.activity.MainActivity
+import com.makentoshe.androidgithubcitemplate.fragments.MainFragmentDD
 
-class DbManager( context: Context) {
+class DbManager(context: Context) {
     val myDbHelper = My_db_helper(context)
     var db: SQLiteDatabase? = null
     fun closeDb(){

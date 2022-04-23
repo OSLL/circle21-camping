@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -17,6 +16,7 @@ import com.makentoshe.androidgithubcitemplate.R
 import com.makentoshe.androidgithubcitemplate.adapter.LastPreparationAdapter
 import com.makentoshe.androidgithubcitemplate.data.dataPerson
 import com.makentoshe.androidgithubcitemplate.databinding.FragmentMainDDBinding
+import com.makentoshe.androidgithubcitemplate.db.DbManager
 
 
 class MainFragmentDD : Fragment() {
@@ -40,7 +40,6 @@ class MainFragmentDD : Fragment() {
         recv.layoutManager = layoutManager
         yourHike = binding.textYourHike
 
-
         val firstNameFrag = arguments?.getString("firstNameBundle")
         val lastNameFrag = arguments?.getString("LastNameBundle")
         val ageFrag = arguments?.getString("Age")
@@ -50,6 +49,7 @@ class MainFragmentDD : Fragment() {
         if (!firstNameFrag.isNullOrEmpty() && !lastNameFrag.isNullOrEmpty() && !ageFrag.isNullOrEmpty()) {
             yourHike.text = "Вы в походе"
             createRecyclerItem(firstNameFrag,lastNameFrag, ageFrag, workLoad)
+
         }
         newUser.setOnClickListener {
             view?.findNavController()?.navigate(MainFragmentDDDirections.actionMainFragmentDDToEditFragment())
